@@ -3,38 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Ethan Lee | Anime Arcade Portfolio</title>
+  <title>Ethan Lee | Neon Arcade Portfolio</title>
 
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap");
 
     :root {
-      --bg: #fffefe;
-      --white: rgba(255, 255, 255, 0.86);
-      --white-strong: rgba(255, 255, 255, 0.96);
-      --text: #243044;
+      --bg: #fbfdff;
+      --text: #1f2937;
       --muted: #6b7280;
-      --soft: #9ca3af;
+      --soft: #94a3b8;
 
-      --pink: #ff73b7;
-      --hotpink: #ff4da6;
+      --pink: #ff5ea8;
       --purple: #9b6bff;
       --blue: #4ebcff;
-      --cyan: #78e8ff;
+      --cyan: #45f0ff;
+      --green: #3ee89f;
       --yellow: #ffd84d;
-      --mint: #41d6a4;
-      --orange: #ffad5c;
-      --red: #ff7b93;
+      --orange: #ff9f43;
+      --red: #ff6b7d;
+      --white: rgba(255,255,255,0.82);
+      --white-strong: rgba(255,255,255,0.95);
 
-      --border: rgba(255, 115, 183, 0.16);
-      --shadow: 0 18px 48px rgba(255, 115, 183, 0.10);
-      --shadow-strong: 0 28px 90px rgba(155, 107, 255, 0.18);
+      --border: rgba(78, 188, 255, 0.16);
+      --shadow: 0 18px 48px rgba(78, 188, 255, 0.10);
+      --shadow-strong: 0 26px 90px rgba(155, 107, 255, 0.16);
 
       --radius-xl: 38px;
       --radius-lg: 28px;
       --radius-md: 22px;
-
       --font-main: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --font-pixel: "Press Start 2P", monospace;
     }
@@ -48,93 +45,106 @@
 
     body {
       min-height: 100vh;
+      overflow-x: hidden;
       font-family: var(--font-main);
       color: var(--text);
       line-height: 1.75;
-      background:
-        radial-gradient(circle at 10% 8%, rgba(255, 115, 183, 0.18), transparent 26%),
-        radial-gradient(circle at 90% 8%, rgba(78, 188, 255, 0.18), transparent 28%),
-        radial-gradient(circle at 50% 100%, rgba(255, 216, 77, 0.14), transparent 30%),
-        linear-gradient(180deg, #ffffff 0%, #fffafc 50%, #fffefb 100%);
-      overflow-x: hidden;
       position: relative;
+      background:
+        radial-gradient(circle at 10% 8%, rgba(255, 94, 168, 0.14), transparent 24%),
+        radial-gradient(circle at 90% 8%, rgba(78, 188, 255, 0.16), transparent 26%),
+        radial-gradient(circle at 80% 75%, rgba(255, 216, 77, 0.15), transparent 24%),
+        radial-gradient(circle at 16% 88%, rgba(62, 232, 159, 0.14), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #f9fcff 50%, #fffdfa 100%);
     }
 
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      pointer-events: none;
       z-index: 0;
+      pointer-events: none;
       background-image:
-        linear-gradient(rgba(255, 115, 183, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(155, 107, 255, 0.04) 1px, transparent 1px);
-      background-size: 34px 34px;
-      mask-image: linear-gradient(to bottom, black, transparent 88%);
+        linear-gradient(rgba(78,188,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(155,107,255,.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.00) 0px,
+          rgba(255,255,255,0.00) 2px,
+          rgba(78,188,255,0.025) 3px,
+          rgba(78,188,255,0.025) 4px
+        );
+      opacity: 0.55;
+      mix-blend-mode: soft-light;
     }
 
     .aurora {
       position: fixed;
-      inset: -20%;
+      inset: -18%;
       z-index: 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at 20% 20%, rgba(255, 115, 183, 0.16), transparent 18%),
-        radial-gradient(circle at 80% 20%, rgba(78, 188, 255, 0.16), transparent 18%),
-        radial-gradient(circle at 50% 80%, rgba(255, 216, 77, 0.14), transparent 20%),
-        radial-gradient(circle at 60% 40%, rgba(155, 107, 255, 0.14), transparent 16%);
-      filter: blur(36px);
-      animation: floatAurora 10s ease-in-out infinite alternate;
+        radial-gradient(circle at 18% 20%, rgba(255,94,168,.16), transparent 18%),
+        radial-gradient(circle at 80% 18%, rgba(78,188,255,.18), transparent 18%),
+        radial-gradient(circle at 56% 82%, rgba(255,216,77,.16), transparent 20%),
+        radial-gradient(circle at 20% 78%, rgba(62,232,159,.14), transparent 20%),
+        radial-gradient(circle at 60% 40%, rgba(155,107,255,.15), transparent 18%);
+      filter: blur(40px);
+      animation: auroraMove 12s ease-in-out infinite alternate;
     }
 
-    @keyframes floatAurora {
-      from {
-        transform: translateY(0) translateX(0) scale(1);
-      }
-      to {
-        transform: translateY(-18px) translateX(10px) scale(1.04);
-      }
+    @keyframes auroraMove {
+      from { transform: translate(0, 0) scale(1); }
+      to { transform: translate(12px, -18px) scale(1.04); }
     }
 
     .floating-ui {
       position: fixed;
       inset: 0;
+      z-index: 2;
       pointer-events: none;
       overflow: hidden;
-      z-index: 1;
     }
 
     .floating-ui span {
       position: absolute;
       font-family: var(--font-pixel);
       font-size: 10px;
-      opacity: 0.22;
-      animation: floaty 6s ease-in-out infinite;
+      opacity: .22;
+      animation: floaty 7s ease-in-out infinite;
       user-select: none;
     }
 
-    .floating-ui .f1 { top: 8%; left: 4%; color: var(--pink); animation-delay: 0s; }
-    .floating-ui .f2 { top: 14%; right: 6%; color: var(--blue); animation-delay: .8s; }
-    .floating-ui .f3 { top: 34%; left: 2%; color: var(--yellow); animation-delay: 1.6s; }
-    .floating-ui .f4 { top: 48%; right: 4%; color: var(--purple); animation-delay: 2.4s; }
-    .floating-ui .f5 { bottom: 12%; left: 6%; color: var(--orange); animation-delay: 3.2s; }
-    .floating-ui .f6 { bottom: 10%; right: 9%; color: var(--mint); animation-delay: 4s; }
-    .floating-ui .f7 { top: 60%; left: 16%; color: var(--red); animation-delay: 4.6s; }
+    .floating-ui .f1 { top: 7%; left: 4%; color: var(--pink); animation-delay: 0s; }
+    .floating-ui .f2 { top: 15%; right: 7%; color: var(--blue); animation-delay: .9s; }
+    .floating-ui .f3 { top: 36%; left: 2%; color: var(--yellow); animation-delay: 1.8s; }
+    .floating-ui .f4 { top: 52%; right: 4%; color: var(--purple); animation-delay: 2.6s; }
+    .floating-ui .f5 { bottom: 12%; left: 7%; color: var(--orange); animation-delay: 3.5s; }
+    .floating-ui .f6 { bottom: 10%; right: 8%; color: var(--green); animation-delay: 4.2s; }
+    .floating-ui .f7 { top: 68%; left: 16%; color: var(--cyan); animation-delay: 4.9s; }
+    .floating-ui .f8 { top: 24%; left: 46%; color: var(--red); animation-delay: 5.6s; }
 
     @keyframes floaty {
-      0%, 100% {
-        transform: translateY(0) rotate(0);
-      }
-      50% {
-        transform: translateY(-14px) rotate(4deg);
-      }
+      0%,100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-14px) rotate(5deg); }
     }
 
     .page {
-      width: min(1220px, 92%);
+      width: min(1240px, 92%);
       margin: 0 auto;
       position: relative;
-      z-index: 2;
+      z-index: 3;
     }
 
     a {
@@ -143,30 +153,58 @@
     }
 
     a:hover {
-      color: var(--hotpink);
+      color: var(--pink);
     }
 
     .glass {
       background: var(--white);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(78,188,255,.12);
       box-shadow: var(--shadow);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
+    }
+
+    .neon-border {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .neon-border::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      padding: 1px;
+      border-radius: inherit;
+      background: linear-gradient(120deg, var(--pink), var(--purple), var(--blue), var(--cyan), var(--green), var(--yellow), var(--orange), var(--pink));
+      background-size: 300% 300%;
+      animation: rainbowFlow 8s linear infinite;
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+      opacity: .95;
+    }
+
+    @keyframes rainbowFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
 
     .navbar {
       position: sticky;
       top: 16px;
       z-index: 99;
-      margin: 18px 0 34px;
+      margin: 18px 0 30px;
       padding: 12px 16px;
+      border-radius: 999px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(255, 115, 183, 0.16);
+      background: rgba(255,255,255,.74);
+      border: 1px solid rgba(78,188,255,.12);
       box-shadow: var(--shadow);
       backdrop-filter: blur(18px);
     }
@@ -180,60 +218,87 @@
     }
 
     .brand-mark {
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 15px;
       display: grid;
       place-items: center;
+      color: white;
       font-family: var(--font-pixel);
       font-size: 10px;
-      color: white;
-      background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue), var(--yellow));
-      background-size: 260% 260%;
-      box-shadow: 0 12px 28px rgba(255, 115, 183, 0.22);
-      animation: rainbowMove 6s ease infinite;
-    }
-
-    @keyframes rainbowMove {
-      0%, 100% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
+      background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue), var(--cyan), var(--green), var(--yellow));
+      background-size: 250% 250%;
+      animation: rainbowFlow 6s linear infinite;
+      box-shadow: 0 12px 28px rgba(78,188,255,.18);
     }
 
     .nav-links {
       display: flex;
-      align-items: center;
-      gap: 16px;
       flex-wrap: wrap;
+      gap: 16px;
       font-size: 13px;
       font-weight: 800;
     }
 
     .nav-links a {
       color: var(--muted);
-      transition: 0.2s ease;
+      transition: .2s ease;
     }
 
     .nav-links a:hover {
-      color: var(--hotpink);
+      color: var(--pink);
       transform: translateY(-1px);
+    }
+
+    .status-marquee {
+      margin-bottom: 20px;
+      border-radius: 22px;
+      padding: 12px 0;
+      overflow: hidden;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(78,188,255,.12);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .status-marquee-track {
+      display: flex;
+      gap: 36px;
+      width: max-content;
+      padding-left: 28px;
+      animation: marquee 22s linear infinite;
+      font-family: var(--font-pixel);
+      font-size: 9px;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .status-marquee-track span:nth-child(1) { color: var(--pink); }
+    .status-marquee-track span:nth-child(2) { color: var(--purple); }
+    .status-marquee-track span:nth-child(3) { color: var(--blue); }
+    .status-marquee-track span:nth-child(4) { color: var(--green); }
+    .status-marquee-track span:nth-child(5) { color: var(--yellow); }
+    .status-marquee-track span:nth-child(6) { color: var(--orange); }
+    .status-marquee-track span:nth-child(7) { color: var(--cyan); }
+    .status-marquee-track span:nth-child(8) { color: var(--red); }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
 
     .hero {
       display: grid;
-      grid-template-columns: 1.18fr 0.82fr;
+      grid-template-columns: 1.15fr .85fr;
       gap: 24px;
       align-items: stretch;
       padding-bottom: 34px;
     }
 
     .hero-main {
-      min-height: 650px;
+      min-height: 680px;
+      padding: 48px;
       border-radius: var(--radius-xl);
-      padding: 46px;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -243,51 +308,38 @@
       isolation: isolate;
     }
 
-    .hero-main::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 8% 10%, rgba(255, 115, 183, 0.20), transparent 22%),
-        radial-gradient(circle at 90% 12%, rgba(78, 188, 255, 0.18), transparent 24%),
-        radial-gradient(circle at 80% 85%, rgba(255, 216, 77, 0.18), transparent 22%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(255, 248, 252, 0.86));
-      z-index: -2;
-    }
-
     .hero-main::after {
       content: "";
       position: absolute;
-      width: 340px;
-      height: 340px;
-      right: -90px;
-      top: -90px;
+      width: 400px;
+      height: 400px;
+      right: -110px;
+      top: -110px;
       border-radius: 50%;
-      background: conic-gradient(from 180deg, var(--pink), var(--purple), var(--blue), var(--yellow), var(--pink));
-      opacity: 0.14;
-      animation: spin 14s linear infinite;
+      background: conic-gradient(from 0deg, var(--pink), var(--purple), var(--blue), var(--cyan), var(--green), var(--yellow), var(--orange), var(--pink));
+      opacity: .14;
+      animation: spin 16s linear infinite;
       z-index: -1;
       filter: blur(2px);
     }
 
     @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+      to { transform: rotate(360deg); }
     }
 
     .magic-ring {
       position: absolute;
-      width: 420px;
-      height: 420px;
+      width: 460px;
+      height: 460px;
       right: -70px;
-      bottom: -110px;
+      bottom: -120px;
       border-radius: 50%;
-      border: 2px dashed rgba(155, 107, 255, 0.18);
+      border: 2px dashed rgba(78,188,255,.18);
       box-shadow:
-        0 0 0 18px rgba(255, 115, 183, 0.05),
-        0 0 0 36px rgba(78, 188, 255, 0.04);
-      animation: slowSpin 24s linear infinite;
+        0 0 0 18px rgba(255,94,168,.05),
+        0 0 0 36px rgba(78,188,255,.05),
+        0 0 0 54px rgba(62,232,159,.04);
+      animation: slowSpin 28s linear infinite;
       z-index: -1;
     }
 
@@ -295,20 +347,21 @@
     .magic-ring::after {
       content: "";
       position: absolute;
-      inset: 34px;
       border-radius: 50%;
-      border: 1px dashed rgba(255, 115, 183, 0.22);
+      border: 1px dashed rgba(155,107,255,.22);
+    }
+
+    .magic-ring::before {
+      inset: 36px;
     }
 
     .magic-ring::after {
-      inset: 74px;
-      border-color: rgba(78, 188, 255, 0.22);
+      inset: 76px;
+      border-color: rgba(255,216,77,.22);
     }
 
     @keyframes slowSpin {
-      to {
-        transform: rotate(-360deg);
-      }
+      to { transform: rotate(-360deg); }
     }
 
     .pixel-chip {
@@ -316,46 +369,46 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      margin-bottom: 22px;
       padding: 11px 15px;
       border-radius: 999px;
-      margin-bottom: 22px;
-      border: 1px solid rgba(255, 115, 183, 0.18);
-      background: rgba(255, 255, 255, 0.85);
-      color: var(--hotpink);
+      border: 1px solid rgba(78,188,255,.16);
+      background: rgba(255,255,255,.9);
+      color: var(--purple);
       font-family: var(--font-pixel);
       font-size: 10px;
-      box-shadow: 0 10px 22px rgba(255, 115, 183, 0.08);
+      box-shadow: 0 10px 22px rgba(78,188,255,.08);
     }
 
     .online-dot {
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: var(--mint);
-      box-shadow: 0 0 16px rgba(65, 214, 164, 0.82);
+      background: var(--green);
+      box-shadow: 0 0 16px rgba(62,232,159,.85);
     }
 
     .hero h1 {
-      font-size: clamp(48px, 7.5vw, 94px);
-      line-height: 0.96;
+      font-size: clamp(50px, 7.4vw, 94px);
+      line-height: .95;
       letter-spacing: -3.5px;
       margin-bottom: 18px;
     }
 
     .hero h1 .rainbow {
-      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue), var(--yellow));
-      background-size: 240% 240%;
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue), var(--cyan), var(--green), var(--yellow), var(--orange));
+      background-size: 260% 260%;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      animation: rainbowMove 6s ease infinite;
+      animation: rainbowFlow 7s linear infinite;
     }
 
     .hero h1 .subglow {
       display: block;
-      font-size: clamp(20px, 2vw, 24px);
       margin-top: 12px;
-      letter-spacing: 0.5px;
+      font-size: clamp(18px, 2vw, 24px);
+      letter-spacing: .5px;
       color: var(--muted);
       font-weight: 800;
     }
@@ -366,32 +419,30 @@
       margin-bottom: 18px;
       padding: 11px 15px;
       border-radius: 16px;
-      background: #111827;
-      color: #f9fafb;
-      box-shadow: 0 16px 30px rgba(17, 24, 39, 0.14);
+      background: #0f172a;
+      color: #f8fafc;
+      box-shadow: 0 18px 30px rgba(15,23,42,.14);
       font-family: var(--font-pixel);
       font-size: 10px;
       line-height: 1.9;
+      border-right: 3px solid var(--green);
       white-space: nowrap;
       overflow: hidden;
-      border-right: 3px solid var(--mint);
-      animation: blinkCaret 0.8s step-end infinite;
+      animation: blinkCaret .8s step-end infinite;
     }
 
     @keyframes blinkCaret {
-      50% {
-        border-color: transparent;
-      }
+      50% { border-color: transparent; }
     }
 
     .typing-box span {
-      color: var(--mint);
+      color: var(--green);
     }
 
     .hero-desc {
       max-width: 720px;
-      color: var(--muted);
       font-size: 18px;
+      color: var(--muted);
       margin-bottom: 28px;
     }
 
@@ -410,26 +461,26 @@
       padding: 13px 18px;
       border-radius: 999px;
       font-weight: 900;
-      transition: 0.22s ease;
+      transition: .22s ease;
       border: 1px solid transparent;
     }
 
     .btn:hover {
-      transform: translateY(-3px) scale(1.01);
+      transform: translateY(-3px) scale(1.02);
     }
 
     .btn-primary {
       color: white;
-      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue), var(--cyan));
       background-size: 220% 220%;
-      animation: rainbowMove 6s ease infinite;
-      box-shadow: 0 18px 30px rgba(255, 115, 183, 0.20);
+      animation: rainbowFlow 6s linear infinite;
+      box-shadow: 0 16px 30px rgba(78,188,255,.18);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.88);
-      border-color: rgba(155, 107, 255, 0.14);
       color: var(--text);
+      background: rgba(255,255,255,.9);
+      border-color: rgba(78,188,255,.14);
     }
 
     .tags {
@@ -444,9 +495,9 @@
       font-size: 13px;
       font-weight: 800;
       color: var(--muted);
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid rgba(255, 115, 183, 0.13);
-      box-shadow: 0 8px 18px rgba(255, 115, 183, 0.04);
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(78,188,255,.12);
+      box-shadow: 0 8px 18px rgba(78,188,255,.04);
     }
 
     .hero-side {
@@ -455,8 +506,8 @@
     }
 
     .side-card {
-      border-radius: var(--radius-lg);
       padding: 24px;
+      border-radius: var(--radius-lg);
       position: relative;
       overflow: hidden;
     }
@@ -472,58 +523,59 @@
     }
 
     .character-card {
-      min-height: 340px;
+      min-height: 356px;
       display: grid;
       place-items: center;
       background:
-        radial-gradient(circle at 20% 12%, rgba(255, 115, 183, 0.20), transparent 22%),
-        radial-gradient(circle at 82% 14%, rgba(78, 188, 255, 0.18), transparent 24%),
-        radial-gradient(circle at 50% 100%, rgba(255, 216, 77, 0.16), transparent 24%),
+        radial-gradient(circle at 20% 12%, rgba(255,94,168,.18), transparent 22%),
+        radial-gradient(circle at 82% 14%, rgba(78,188,255,.18), transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(255,216,77,.14), transparent 24%),
         linear-gradient(135deg, #fff8fc, #ffffff);
     }
 
     .player-card {
-      width: min(360px, 100%);
+      width: min(365px, 100%);
       padding: 18px;
       border-radius: 28px;
-      background: rgba(255, 255, 255, 0.78);
-      border: 2px dashed rgba(255, 115, 183, 0.22);
+      background: rgba(255,255,255,.82);
+      border: 2px dashed rgba(78,188,255,.18);
       position: relative;
-      box-shadow: 0 18px 36px rgba(255, 115, 183, 0.08);
+      box-shadow: 0 18px 36px rgba(78,188,255,.08);
     }
 
     .player-card::before {
-      content: "MAGICAL PROFILE";
+      content: "ARCADE PROFILE";
       position: absolute;
       left: 18px;
       top: -13px;
       padding: 6px 10px;
       border-radius: 999px;
-      background: linear-gradient(90deg, var(--pink), var(--purple));
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
       color: white;
       font-family: var(--font-pixel);
       font-size: 8px;
     }
 
     .anime-portrait {
-      height: 200px;
+      height: 208px;
       border-radius: 26px;
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(255, 115, 183, 0.12);
-      background: linear-gradient(180deg, #fff0f7 0%, #f8fbff 100%);
-      box-shadow: inset 0 -22px 58px rgba(255, 115, 183, 0.08);
+      border: 1px solid rgba(78,188,255,.12);
+      background:
+        linear-gradient(180deg, #fff6fb 0%, #f5fbff 100%);
+      box-shadow: inset 0 -22px 58px rgba(78,188,255,.08);
     }
 
     .anime-portrait .hair {
       position: absolute;
       width: 78%;
-      height: 92px;
+      height: 96px;
       left: 11%;
       top: 18px;
       border-radius: 48% 48% 38% 38%;
-      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
-      opacity: 0.78;
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue), var(--cyan));
+      opacity: .8;
     }
 
     .anime-portrait .face {
@@ -531,55 +583,45 @@
       width: 122px;
       height: 132px;
       left: 50%;
-      top: 46px;
+      top: 48px;
       transform: translateX(-50%);
       border-radius: 44% 44% 48% 48%;
       background: #fff9f5;
-      box-shadow: inset 0 -10px 24px rgba(255, 182, 193, 0.14);
+      box-shadow: inset 0 -10px 24px rgba(255,182,193,.14);
     }
 
     .anime-portrait .eye {
       position: absolute;
       width: 20px;
       height: 20px;
-      top: 98px;
+      top: 100px;
       border-radius: 50%;
-      background: radial-gradient(circle at 36% 35%, #ffffff 0 3px, transparent 4px), #2b3341;
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.55) inset;
+      background: radial-gradient(circle at 36% 35%, #ffffff 0 3px, transparent 4px), #243044;
+      box-shadow: 0 0 0 3px rgba(255,255,255,.55) inset;
     }
 
-    .anime-portrait .eye.left {
-      left: calc(50% - 32px);
-    }
-
-    .anime-portrait .eye.right {
-      left: calc(50% + 12px);
-    }
+    .anime-portrait .eye.left { left: calc(50% - 32px); }
+    .anime-portrait .eye.right { left: calc(50% + 12px); }
 
     .anime-portrait .blush {
       position: absolute;
       width: 22px;
       height: 10px;
-      top: 124px;
+      top: 126px;
       border-radius: 999px;
-      background: rgba(255, 115, 183, 0.26);
+      background: rgba(255,94,168,.24);
       filter: blur(1px);
     }
 
-    .anime-portrait .blush.left {
-      left: calc(50% - 56px);
-    }
-
-    .anime-portrait .blush.right {
-      left: calc(50% + 30px);
-    }
+    .anime-portrait .blush.left { left: calc(50% - 56px); }
+    .anime-portrait .blush.right { left: calc(50% + 30px); }
 
     .anime-portrait .mouth {
       position: absolute;
       width: 18px;
       height: 8px;
       left: 50%;
-      top: 134px;
+      top: 136px;
       transform: translateX(-50%);
       border-bottom: 3px solid var(--red);
       border-radius: 0 0 20px 20px;
@@ -588,24 +630,18 @@
     .anime-portrait .spark {
       position: absolute;
       font-size: 16px;
-      opacity: 0.7;
+      opacity: .8;
       animation: sparkle 2.4s ease-in-out infinite;
     }
 
     .anime-portrait .spark.s1 { top: 24px; left: 24px; color: var(--pink); }
     .anime-portrait .spark.s2 { top: 38px; right: 26px; color: var(--blue); animation-delay: .6s; }
     .anime-portrait .spark.s3 { bottom: 18px; left: 40px; color: var(--yellow); animation-delay: 1.1s; }
-    .anime-portrait .spark.s4 { bottom: 26px; right: 44px; color: var(--purple); animation-delay: 1.7s; }
+    .anime-portrait .spark.s4 { bottom: 26px; right: 44px; color: var(--green); animation-delay: 1.7s; }
 
     @keyframes sparkle {
-      0%, 100% {
-        transform: scale(1) rotate(0deg);
-        opacity: 0.55;
-      }
-      50% {
-        transform: scale(1.22) rotate(14deg);
-        opacity: 0.95;
-      }
+      0%,100% { transform: scale(1) rotate(0); opacity: .55; }
+      50% { transform: scale(1.24) rotate(12deg); opacity: .98; }
     }
 
     .player-meta {
@@ -634,9 +670,9 @@
     .stat {
       padding: 16px;
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.90);
-      border: 1px solid rgba(255, 115, 183, 0.12);
-      transition: 0.22s ease;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(78,188,255,.12);
+      transition: .22s ease;
     }
 
     .stat:hover {
@@ -652,6 +688,22 @@
     .stat span {
       color: var(--soft);
       font-size: 13px;
+    }
+
+    .mini-mission {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mini-mission div {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(78,188,255,.12);
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 700;
     }
 
     section {
@@ -679,7 +731,7 @@
       font-family: var(--font-pixel);
       font-size: 8px;
       color: white;
-      background: linear-gradient(90deg, var(--pink), var(--purple));
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue), var(--green));
       white-space: nowrap;
     }
 
@@ -695,13 +747,19 @@
       gap: 18px;
     }
 
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
     .card {
       padding: 22px;
       border-radius: 24px;
       background: var(--white-strong);
-      border: 1px solid rgba(255, 115, 183, 0.12);
-      box-shadow: 0 12px 28px rgba(255, 115, 183, 0.06);
-      transition: 0.24s ease;
+      border: 1px solid rgba(78,188,255,.12);
+      box-shadow: 0 12px 28px rgba(78,188,255,.06);
+      transition: .24s ease;
       position: relative;
       overflow: hidden;
     }
@@ -709,30 +767,31 @@
     .card::before {
       content: "";
       position: absolute;
-      inset: auto auto 0 0;
+      left: 0;
+      bottom: 0;
       width: 100%;
       height: 4px;
-      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue), var(--yellow));
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue), var(--cyan), var(--green), var(--yellow), var(--orange));
       transform: scaleX(0);
       transform-origin: left;
-      transition: 0.28s ease;
+      transition: .28s ease;
     }
 
     .card::after {
       content: "";
       position: absolute;
-      width: 120px;
-      height: 120px;
-      right: -40px;
-      top: -40px;
+      width: 140px;
+      height: 140px;
+      right: -50px;
+      top: -50px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 115, 183, 0.12), transparent 72%);
+      background: radial-gradient(circle, rgba(78,188,255,.10), transparent 72%);
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
       box-shadow: var(--shadow-strong);
-      border-color: rgba(155, 107, 255, 0.18);
+      border-color: rgba(155,107,255,.18);
     }
 
     .card:hover::before {
@@ -748,8 +807,8 @@
       border-radius: 14px;
       color: white;
       font-size: 22px;
-      background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
-      box-shadow: 0 12px 22px rgba(255, 115, 183, 0.16);
+      background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue), var(--green));
+      box-shadow: 0 12px 22px rgba(78,188,255,.16);
       position: relative;
       z-index: 1;
     }
@@ -775,27 +834,29 @@
 
     .python-section {
       background:
-        radial-gradient(circle at 8% 10%, rgba(255, 216, 77, 0.16), transparent 22%),
-        radial-gradient(circle at 92% 12%, rgba(78, 188, 255, 0.14), transparent 22%),
-        rgba(255, 255, 255, 0.84);
+        radial-gradient(circle at 8% 10%, rgba(255,216,77,.14), transparent 22%),
+        radial-gradient(circle at 92% 12%, rgba(78,188,255,.14), transparent 22%),
+        radial-gradient(circle at 30% 80%, rgba(62,232,159,.12), transparent 20%),
+        rgba(255,255,255,.84);
     }
 
     .python-layout {
       display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
+      grid-template-columns: .92fr 1.08fr;
       gap: 18px;
       align-items: stretch;
     }
 
     .python-display {
-      min-height: 400px;
+      min-height: 410px;
       padding: 28px;
       border-radius: 28px;
       background:
-        radial-gradient(circle at 14% 14%, rgba(255, 216, 77, 0.22), transparent 20%),
-        radial-gradient(circle at 84% 14%, rgba(78, 188, 255, 0.18), transparent 20%),
+        radial-gradient(circle at 14% 14%, rgba(255,216,77,.22), transparent 20%),
+        radial-gradient(circle at 84% 14%, rgba(78,188,255,.18), transparent 20%),
+        radial-gradient(circle at 18% 82%, rgba(62,232,159,.14), transparent 18%),
         linear-gradient(135deg, #fffef7, #ffffff);
-      border: 1px solid rgba(255, 115, 183, 0.12);
+      border: 1px solid rgba(78,188,255,.12);
       position: relative;
       overflow: hidden;
       display: flex;
@@ -811,21 +872,21 @@
       font-family: var(--font-pixel);
       font-size: 8px;
       color: var(--purple);
-      opacity: 0.72;
+      opacity: .72;
     }
 
     .python-title {
-      font-size: clamp(48px, 6vw, 80px);
+      font-size: clamp(50px, 6vw, 82px);
       line-height: 1;
       letter-spacing: -2.5px;
       font-weight: 950;
       margin-bottom: 14px;
-      background: linear-gradient(90deg, var(--yellow), var(--blue), var(--purple));
-      background-size: 220% 220%;
+      background: linear-gradient(90deg, var(--yellow), var(--green), var(--blue), var(--purple));
+      background-size: 240% 240%;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      animation: rainbowMove 6s ease infinite;
+      animation: rainbowFlow 7s linear infinite;
     }
 
     .python-display p {
@@ -835,17 +896,17 @@
     .terminal {
       margin-top: 18px;
       border-radius: 20px;
-      background: #111827;
-      color: #f9fafb;
+      background: #0f172a;
+      color: #f8fafc;
       overflow: hidden;
-      box-shadow: 0 18px 36px rgba(17, 24, 39, 0.15);
+      box-shadow: 0 18px 36px rgba(15,23,42,.15);
     }
 
     .terminal-bar {
       display: flex;
       gap: 7px;
       padding: 12px 14px;
-      background: #1f2937;
+      background: #1e293b;
     }
 
     .terminal-bar i {
@@ -857,7 +918,7 @@
 
     .terminal-bar i:nth-child(1) { background: var(--red); }
     .terminal-bar i:nth-child(2) { background: var(--yellow); }
-    .terminal-bar i:nth-child(3) { background: var(--mint); }
+    .terminal-bar i:nth-child(3) { background: var(--green); }
 
     .terminal-code {
       padding: 16px;
@@ -869,6 +930,7 @@
     .terminal-code .green { color: #86efac; }
     .terminal-code .blue { color: #7dd3fc; }
     .terminal-code .pink { color: #f9a8d4; }
+    .terminal-code .yellow { color: #fde68a; }
 
     .project-badge {
       display: inline-block;
@@ -876,40 +938,89 @@
       padding: 6px 10px;
       border-radius: 999px;
       color: white;
-      background: linear-gradient(90deg, var(--pink), var(--purple));
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
       font-size: 11px;
       font-weight: 900;
-      letter-spacing: 0.4px;
+      letter-spacing: .4px;
       position: relative;
       z-index: 1;
-    }
-
-    .portfolio-section {
-      background:
-        radial-gradient(circle at 8% 8%, rgba(155, 107, 255, 0.12), transparent 22%),
-        radial-gradient(circle at 90% 90%, rgba(78, 188, 255, 0.12), transparent 22%),
-        rgba(255, 255, 255, 0.84);
     }
 
     .github-board {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 18px;
+      margin-bottom: 18px;
     }
 
     .github-card {
       padding: 18px;
       border-radius: 24px;
-      background: rgba(255, 255, 255, 0.94);
-      border: 1px solid rgba(255, 115, 183, 0.12);
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(78,188,255,.12);
+      box-shadow: 0 12px 26px rgba(78,188,255,.08);
       overflow: hidden;
-      box-shadow: 0 12px 26px rgba(155, 107, 255, 0.08);
     }
 
     .github-card img {
       width: 100%;
       display: block;
       border-radius: 18px;
+    }
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .quick-link {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(78,188,255,.12);
+      transition: .22s ease;
+    }
+
+    .quick-link:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .quick-link strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+
+    .quick-link p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .achievement-card {
+      text-align: center;
+      padding: 20px 16px;
+    }
+
+    .achievement-card .num {
+      display: block;
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue), var(--green), var(--yellow));
+      background-size: 240% 240%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: rainbowFlow 7s linear infinite;
+    }
+
+    .achievement-card .label {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
     }
 
     .skill-bars {
@@ -920,8 +1031,8 @@
     .skill {
       padding: 16px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid rgba(255, 115, 183, 0.12);
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(78,188,255,.12);
     }
 
     .skill-top {
@@ -940,16 +1051,16 @@
     .bar {
       height: 12px;
       border-radius: 999px;
-      background: rgba(156, 163, 175, 0.18);
+      background: rgba(148,163,184,.16);
       overflow: hidden;
     }
 
     .bar div {
       height: 100%;
       border-radius: 999px;
-      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue), var(--yellow));
-      background-size: 220% 220%;
-      animation: rainbowMove 6s ease infinite;
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue), var(--cyan), var(--green), var(--yellow));
+      background-size: 240% 240%;
+      animation: rainbowFlow 7s linear infinite;
     }
 
     .timeline {
@@ -963,9 +1074,9 @@
       gap: 16px;
       padding: 18px;
       border-radius: 24px;
-      background: rgba(255, 255, 255, 0.94);
-      border: 1px solid rgba(255, 115, 183, 0.13);
-      transition: 0.22s ease;
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(78,188,255,.12);
+      transition: .22s ease;
     }
 
     .timeline-item:hover {
@@ -976,7 +1087,7 @@
     .timeline-date {
       font-family: var(--font-pixel);
       font-size: 10px;
-      color: var(--hotpink);
+      color: var(--purple);
       line-height: 1.8;
     }
 
@@ -998,10 +1109,10 @@
     .contact {
       padding: 18px;
       border-radius: 22px;
-      background: rgba(255, 255, 255, 0.94);
-      border: 1px solid rgba(255, 115, 183, 0.13);
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(78,188,255,.12);
       overflow-wrap: anywhere;
-      transition: 0.22s ease;
+      transition: .22s ease;
     }
 
     .contact:hover {
@@ -1016,7 +1127,7 @@
     }
 
     .footer {
-      padding: 20px 0 48px;
+      padding: 20px 0 50px;
       text-align: center;
       color: var(--soft);
       font-size: 14px;
@@ -1024,13 +1135,19 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(22px);
-      transition: 0.7s ease;
+      transform: translateY(24px);
+      transition: .72s ease;
     }
 
     .reveal.show {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 980px) {
@@ -1039,7 +1156,8 @@
       .grid-3,
       .python-layout,
       .contact-grid,
-      .github-board {
+      .github-board,
+      .quick-links {
         grid-template-columns: 1fr;
       }
 
@@ -1067,7 +1185,8 @@
         padding: 22px;
       }
 
-      .stats-grid {
+      .stats-grid,
+      .grid-4 {
         grid-template-columns: 1fr;
       }
 
@@ -1090,7 +1209,6 @@
     }
   </style>
 </head>
-
 <body>
   <div class="aurora"></div>
 
@@ -1102,6 +1220,7 @@
     <span class="f5">PRESS START</span>
     <span class="f6">+ EXP</span>
     <span class="f7">MAGIC!</span>
+    <span class="f8">COMBO!</span>
   </div>
 
   <main class="page">
@@ -1117,14 +1236,36 @@
         <a href="#python">Python</a>
         <a href="#projects">Projects</a>
         <a href="#portfolio">Portfolio</a>
+        <a href="#achievements">Highlights</a>
         <a href="#skills">Skills</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#contact">Contact</a>
       </div>
     </nav>
 
+    <div class="status-marquee glass neon-border">
+      <div class="status-marquee-track">
+        <span>PYTHON MAIN WEAPON</span>
+        <span>ALGORITHMS TRAINING</span>
+        <span>MATH MODELING</span>
+        <span>AI APPLICATIONS</span>
+        <span>SDN / P4 EXPLORING</span>
+        <span>BUILDING PORTFOLIO</span>
+        <span>NOTES & PROJECTS</span>
+        <span>LEVELING UP</span>
+        <span>PYTHON MAIN WEAPON</span>
+        <span>ALGORITHMS TRAINING</span>
+        <span>MATH MODELING</span>
+        <span>AI APPLICATIONS</span>
+        <span>SDN / P4 EXPLORING</span>
+        <span>BUILDING PORTFOLIO</span>
+        <span>NOTES & PROJECTS</span>
+        <span>LEVELING UP</span>
+      </div>
+    </div>
+
     <header class="hero">
-      <section class="hero-main glass reveal">
+      <section class="hero-main glass neon-border reveal">
         <div class="magic-ring"></div>
 
         <div class="pixel-chip">
@@ -1135,22 +1276,22 @@
         <h1>
           Code. Build.<br />
           <span class="rainbow">Level Up.</span>
-          <span class="subglow">Anime Arcade × Serious Developer Portfolio</span>
+          <span class="subglow">Neon Arcade × Anime Portfolio × Developer Showcase</span>
         </h1>
 
         <div class="typing-box" id="typing-box">
-          <span>&gt;</span> python main.py --mode portfolio --style anime-arcade-pro
+          <span>&gt;</span> python main.py --mode portfolio --theme neon-arcade
         </div>
 
         <p class="hero-desc">
           Hi, I’m <strong>Ethan Lee</strong>, a computer science undergraduate student exploring
           <strong>Python</strong>, algorithms, mathematical modeling, AI applications, and SDN / P4.
-          This site combines anime-style visual energy with a serious project portfolio.
+          This site is designed as a vibrant arcade-style portfolio that showcases both personality and technical direction.
         </p>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#python">🐍 Python Focus</a>
-          <a class="btn btn-secondary" href="#projects">🎮 View Projects</a>
+          <a class="btn btn-primary" href="#projects">🎮 View Projects</a>
+          <a class="btn btn-secondary" href="#portfolio">📊 GitHub Dashboard</a>
           <a class="btn btn-secondary" href="https://github.com/lheng2386-png" target="_blank">⭐ GitHub Profile</a>
         </div>
 
@@ -1160,12 +1301,12 @@
           <span class="tag">Math Modeling</span>
           <span class="tag">AI Applications</span>
           <span class="tag">SDN / P4</span>
-          <span class="tag">Anime Arcade Portfolio</span>
+          <span class="tag">Neon Arcade UI</span>
         </div>
       </section>
 
       <aside class="hero-side">
-        <div class="side-card glass character-card reveal">
+        <div class="side-card glass neon-border character-card reveal">
           <div class="player-card">
             <div class="anime-portrait">
               <div class="hair"></div>
@@ -1188,11 +1329,11 @@
           </div>
         </div>
 
-        <div class="side-card glass reveal">
+        <div class="side-card glass neon-border reveal">
           <h3>Status Board</h3>
           <p>
             Student at Wuhan University of Science and Technology.
-            Building fundamentals through projects, notes, competitions, and systems learning.
+            Building fundamentals through projects, technical notes, competitions, and systems learning.
           </p>
 
           <div class="stats-grid">
@@ -1213,11 +1354,17 @@
               <span>Algorithms</span>
             </div>
           </div>
+
+          <div class="mini-mission">
+            <div>🎯 Current Mission: Build stronger projects and portfolio.</div>
+            <div>⚡ Current Style: Neon arcade + anime + technical showcase.</div>
+            <div>🚀 Next Step: More demos, better repos, clearer roadmap.</div>
+          </div>
         </div>
       </aside>
     </header>
 
-    <section id="about" class="glass reveal">
+    <section id="about" class="glass neon-border reveal">
       <div class="section-title">
         <h2>About Me</h2>
         <span>PROFILE</span>
@@ -1225,27 +1372,27 @@
 
       <div class="grid-2">
         <div class="card">
-          <div class="card-icon">🌸</div>
+          <div class="card-icon">🌈</div>
           <h3>Who I Am</h3>
           <p>
             I am Ethan Lee, a computer science undergraduate student interested in turning ideas
             into visible projects. My current path combines programming, modeling, AI applications,
-            and network systems.
+            systems learning, and practical portfolio building.
           </p>
         </div>
 
         <div class="card">
-          <div class="card-icon">🚀</div>
+          <div class="card-icon">🕹️</div>
           <h3>What I Value</h3>
           <p>
-            I value long-term accumulation: strong fundamentals, clean notes, reproducible practice,
-            and projects that can be demonstrated instead of only described.
+            I value long-term accumulation: strong fundamentals, clean notes, reproducible learning,
+            competition experience, and projects that can be demonstrated instead of only described.
           </p>
         </div>
       </div>
     </section>
 
-    <section id="focus" class="glass reveal">
+    <section id="focus" class="glass neon-border reveal">
       <div class="section-title">
         <h2>Current Focus</h2>
         <span>QUEST LOG</span>
@@ -1266,7 +1413,7 @@
           <h3>Mathematical Modeling</h3>
           <p>
             Learning data preprocessing, model selection, visualization, sensitivity analysis,
-            error analysis, and competition-oriented technical writing.
+            error analysis, and competition-oriented paper writing.
           </p>
         </div>
 
@@ -1284,7 +1431,7 @@
           <h3>SDN / P4</h3>
           <p>
             Studying Mininet, Open vSwitch, OpenFlow, and P4 programmable networks,
-            with the goal of building small but complete experiments.
+            with the goal of building complete small experiments.
           </p>
         </div>
 
@@ -1302,13 +1449,13 @@
           <h3>Portfolio Building</h3>
           <p>
             Turning competition ideas, class knowledge, and lab directions into demos,
-            repositories, and project summaries.
+            repositories, project cards, and visible technical records.
           </p>
         </div>
       </div>
     </section>
 
-    <section id="python" class="glass python-section reveal">
+    <section id="python" class="glass neon-border python-section reveal">
       <div class="section-title">
         <h2>Python Focus</h2>
         <span>MAIN WEAPON</span>
@@ -1328,11 +1475,11 @@
             <div class="terminal-bar">
               <i></i><i></i><i></i>
             </div>
-
             <div class="terminal-code">
               <div><span class="green">class</span> <span class="blue">EthanLee</span>:</div>
               <div>&nbsp;&nbsp;main_language = <span class="pink">"Python"</span></div>
               <div>&nbsp;&nbsp;focus = [<span class="pink">"Algorithms"</span>, <span class="pink">"AI"</span>, <span class="pink">"Modeling"</span>]</div>
+              <div>&nbsp;&nbsp;tools = [<span class="yellow">"NumPy"</span>, <span class="yellow">"Pandas"</span>, <span class="yellow">"Matplotlib"</span>]</div>
               <div>&nbsp;&nbsp;status = <span class="pink">"Leveling up..."</span></div>
             </div>
           </div>
@@ -1378,7 +1525,7 @@
       </div>
     </section>
 
-    <section id="projects" class="glass reveal">
+    <section id="projects" class="glass neon-border reveal">
       <div class="section-title">
         <h2>Featured Projects</h2>
         <span>STAGE SELECT</span>
@@ -1435,7 +1582,7 @@
       </div>
     </section>
 
-    <section id="portfolio" class="glass portfolio-section reveal">
+    <section id="portfolio" class="glass neon-border reveal">
       <div class="section-title">
         <h2>GitHub Portfolio</h2>
         <span>DASHBOARD</span>
@@ -1444,21 +1591,67 @@
       <div class="github-board">
         <div class="github-card">
           <img
-            src="https://github-readme-stats.vercel.app/api?username=lheng2386-png&show_icons=true&theme=buefy&hide_border=true&title_color=ff4da6&icon_color=9b6bff"
+            src="https://github-readme-stats.vercel.app/api?username=lheng2386-png&show_icons=true&theme=buefy&hide_border=true&title_color=9b6bff&icon_color=4ebcff&text_color=334155"
             alt="GitHub Stats"
           />
         </div>
 
         <div class="github-card">
           <img
-            src="https://github-readme-stats.vercel.app/api/top-langs/?username=lheng2386-png&layout=compact&theme=buefy&hide_border=true&title_color=ff4da6"
+            src="https://github-readme-stats.vercel.app/api/top-langs/?username=lheng2386-png&layout=compact&theme=buefy&hide_border=true&title_color=ff5ea8&text_color=334155"
             alt="Top Languages"
           />
         </div>
       </div>
+
+      <div class="quick-links">
+        <a class="quick-link" href="https://github.com/lheng2386-png" target="_blank">
+          <strong>GitHub Profile</strong>
+          <p>Browse repositories, pinned projects, and learning records.</p>
+        </a>
+
+        <a class="quick-link" href="#projects">
+          <strong>Featured Projects</strong>
+          <p>Quick jump to current project cards and technical directions.</p>
+        </a>
+
+        <a class="quick-link" href="#contact">
+          <strong>Contact & Links</strong>
+          <p>Find email, Telegram, homepage, and other ways to connect.</p>
+        </a>
+      </div>
     </section>
 
-    <section id="skills" class="glass reveal">
+    <section id="achievements" class="glass neon-border reveal">
+      <div class="section-title">
+        <h2>Highlights</h2>
+        <span>POWER UPS</span>
+      </div>
+
+      <div class="grid-4">
+        <div class="card achievement-card">
+          <span class="num">Python</span>
+          <span class="label">Main Technical Weapon</span>
+        </div>
+
+        <div class="card achievement-card">
+          <span class="num">AI</span>
+          <span class="label">Current Exploration Direction</span>
+        </div>
+
+        <div class="card achievement-card">
+          <span class="num">P4</span>
+          <span class="label">Programmable Network Learning</span>
+        </div>
+
+        <div class="card achievement-card">
+          <span class="num">DSA</span>
+          <span class="label">Daily Algorithm Training</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="glass neon-border reveal">
       <div class="section-title">
         <h2>Skill Loadout</h2>
         <span>LOADOUT</span>
@@ -1471,7 +1664,7 @@
               <span>Python</span>
               <span>Main Tool</span>
             </div>
-            <div class="bar"><div style="width: 78%;"></div></div>
+            <div class="bar"><div style="width: 80%;"></div></div>
           </div>
 
           <div class="skill">
@@ -1479,7 +1672,7 @@
               <span>Algorithms</span>
               <span>Training</span>
             </div>
-            <div class="bar"><div style="width: 62%;"></div></div>
+            <div class="bar"><div style="width: 65%;"></div></div>
           </div>
 
           <div class="skill">
@@ -1487,7 +1680,7 @@
               <span>Mathematical Modeling</span>
               <span>Competition</span>
             </div>
-            <div class="bar"><div style="width: 68%;"></div></div>
+            <div class="bar"><div style="width: 70%;"></div></div>
           </div>
 
           <div class="skill">
@@ -1495,7 +1688,7 @@
               <span>AI Applications</span>
               <span>Exploring</span>
             </div>
-            <div class="bar"><div style="width: 56%;"></div></div>
+            <div class="bar"><div style="width: 58%;"></div></div>
           </div>
         </div>
 
@@ -1529,7 +1722,7 @@
       </div>
     </section>
 
-    <section id="roadmap" class="glass reveal">
+    <section id="roadmap" class="glass neon-border reveal">
       <div class="section-title">
         <h2>Roadmap</h2>
         <span>LEVEL PLAN</span>
@@ -1570,7 +1763,7 @@
       </div>
     </section>
 
-    <section id="contact" class="glass reveal">
+    <section id="contact" class="glass neon-border reveal">
       <div class="section-title">
         <h2>Contact</h2>
         <span>CONNECT</span>
@@ -1600,26 +1793,24 @@
     </section>
 
     <footer class="footer">
-      <p>© 2026 Ethan Lee · Anime Arcade × Serious Developer Portfolio.</p>
+      <p>© 2026 Ethan Lee · Neon Arcade Portfolio · Built with color, motion, and code.</p>
     </footer>
   </main>
 
   <script>
     const typingBox = document.getElementById("typing-box");
-    const text = "> python main.py --mode portfolio --style anime-arcade-pro";
+    const text = "> python main.py --mode portfolio --theme neon-arcade";
     let index = 0;
 
     function typeLoop() {
       typingBox.innerHTML = '<span>&gt;</span> ' + text.slice(2, index);
       index++;
-
       if (index > text.length) {
         setTimeout(() => {
           index = 0;
         }, 1500);
       }
     }
-
     setInterval(typeLoop, 70);
 
     const observer = new IntersectionObserver((entries) => {
