@@ -1,304 +1,811 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>李恒的个人主页</title>
+  <title>Ethan Lee | Personal Homepage</title>
 
   <style>
+    :root {
+      --bg-main: #0f172a;
+      --bg-card: rgba(15, 23, 42, 0.72);
+      --bg-soft: rgba(30, 41, 59, 0.72);
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --text-soft: #94a3b8;
+      --accent: #38bdf8;
+      --accent-2: #818cf8;
+      --accent-3: #22c55e;
+      --border: rgba(148, 163, 184, 0.24);
+      --shadow: 0 24px 70px rgba(15, 23, 42, 0.65);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: "Microsoft YaHei", Arial, sans-serif;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       line-height: 1.8;
-      color: #222;
-      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.20), transparent 32%),
+        radial-gradient(circle at top right, rgba(129, 140, 248, 0.18), transparent 34%),
+        linear-gradient(135deg, #020617 0%, #0f172a 50%, #111827 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
     }
 
     a {
-      color: #2563eb;
+      color: var(--accent);
       text-decoration: none;
     }
 
     a:hover {
-      text-decoration: underline;
+      color: #7dd3fc;
     }
 
-    .container {
-      width: 90%;
-      max-width: 1000px;
+    .page {
+      width: min(1120px, 92%);
       margin: 0 auto;
-      padding: 40px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 16px;
+      z-index: 10;
+      margin: 18px 0 34px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 16px 45px rgba(2, 6, 23, 0.45);
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      font-size: 17px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
     }
 
     .hero {
-      text-align: center;
-      padding: 70px 20px;
-      background: white;
-      border-radius: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      margin-bottom: 35px;
+      min-height: 76vh;
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 30px;
+      align-items: center;
+      padding: 46px 0 70px;
     }
 
-    .hero h1 {
-      font-size: 42px;
-      margin-bottom: 15px;
-      color: #111827;
+    .hero-card,
+    .side-card,
+    section {
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      backdrop-filter: blur(22px);
+      box-shadow: var(--shadow);
     }
 
-    .hero p {
+    .hero-card {
+      padding: 48px;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -90px;
+      top: -90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.28), transparent 70%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      border-radius: 999px;
+      color: #bae6fd;
+      background: rgba(14, 165, 233, 0.10);
+      font-size: 14px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-3);
+      box-shadow: 0 0 16px var(--accent-3);
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.05;
+      margin-bottom: 18px;
+      letter-spacing: -2.5px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-desc {
+      max-width: 680px;
+      color: var(--text-muted);
       font-size: 18px;
-      color: #4b5563;
-      margin-bottom: 10px;
+      margin-bottom: 30px;
     }
 
-    .tag-list {
-      margin-top: 25px;
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-weight: 700;
+      transition: transform 0.2s ease, border 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: #020617;
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      border: none;
+    }
+
+    .btn-secondary {
+      color: var(--text-main);
+      background: rgba(30, 41, 59, 0.65);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .tag {
-      display: inline-block;
-      padding: 6px 14px;
-      margin: 6px;
+      padding: 7px 12px;
       border-radius: 999px;
-      background: #e0e7ff;
-      color: #3730a3;
-      font-size: 14px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      background: rgba(30, 41, 59, 0.52);
+      font-size: 13px;
+    }
+
+    .side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .side-card {
+      padding: 26px;
+      border-radius: var(--radius-md);
+    }
+
+    .side-card h3 {
+      margin-bottom: 12px;
+      font-size: 19px;
+    }
+
+    .side-card p,
+    .side-card li {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .metric {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(30, 41, 59, 0.64);
+      border: 1px solid var(--border);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--text-main);
+      font-size: 22px;
+    }
+
+    .metric span {
+      color: var(--text-soft);
+      font-size: 13px;
     }
 
     section {
-      background: white;
-      padding: 30px;
-      margin-bottom: 25px;
-      border-radius: 20px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      margin-bottom: 26px;
+      padding: 34px;
+      border-radius: var(--radius-lg);
     }
 
-    section h2 {
-      font-size: 26px;
-      margin-bottom: 18px;
-      color: #111827;
-      border-left: 5px solid #2563eb;
-      padding-left: 12px;
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 22px;
     }
 
-    section h3 {
-      font-size: 20px;
-      margin-top: 18px;
-      margin-bottom: 8px;
-      color: #1f2937;
+    .section-title h2 {
+      font-size: 30px;
+      letter-spacing: -0.8px;
     }
 
-    ul {
-      padding-left: 22px;
-    }
-
-    li {
-      margin-bottom: 8px;
-    }
-
-    .project-card {
-      padding: 18px;
-      border: 1px solid #e5e7eb;
-      border-radius: 16px;
-      margin-bottom: 15px;
-      background: #f9fafb;
-    }
-
-    .project-card h3 {
-      margin-top: 0;
-      color: #111827;
-    }
-
-    .footer {
-      text-align: center;
-      color: #6b7280;
+    .section-title span {
+      color: var(--text-soft);
       font-size: 14px;
-      padding: 30px 0;
     }
 
-    .highlight {
-      color: #2563eb;
-      font-weight: bold;
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
     }
 
-    .contact-card p {
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 22px;
+      border-radius: 22px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      transition: transform 0.22s ease, border 0.22s ease, background 0.22s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.5);
+      background: rgba(30, 41, 59, 0.88);
+    }
+
+    .card h3 {
+      font-size: 19px;
       margin-bottom: 10px;
     }
 
-    @media (max-width: 600px) {
+    .card p,
+    .card li {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .card ul {
+      padding-left: 18px;
+    }
+
+    .project-badge {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      color: #bfdbfe;
+      background: rgba(37, 99, 235, 0.18);
+      border: 1px solid rgba(96, 165, 250, 0.26);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(30, 41, 59, 0.55);
+    }
+
+    .timeline-date {
+      color: #7dd3fc;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .timeline-content h3 {
+      margin-bottom: 4px;
+    }
+
+    .timeline-content p {
+      color: var(--text-muted);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .contact {
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: rgba(30, 41, 59, 0.58);
+      overflow-wrap: anywhere;
+    }
+
+    .contact strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .footer {
+      padding: 34px 0 48px;
+      text-align: center;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid-2,
+      .grid-3,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
       .hero {
-        padding: 50px 18px;
+        padding-top: 20px;
       }
 
-      .hero h1 {
-        font-size: 32px;
+      .nav-links {
+        display: none;
       }
 
-      .hero p {
-        font-size: 16px;
+      .hero-card {
+        padding: 34px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: 94%;
       }
 
+      .navbar {
+        border-radius: 22px;
+      }
+
+      .hero-card,
       section {
-        padding: 22px;
+        padding: 24px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <main class="page">
 
-    <!-- 顶部介绍 -->
-    <div class="hero">
-      <h1>你好，我是李恒 👋</h1>
-      <p>武汉科技大学计算机专业本科生</p>
-      <p>正在学习算法、数学建模、人工智能与 SDN / P4 可编程网络</p>
-
-      <div class="tag-list">
-        <span class="tag">Computer Science</span>
-        <span class="tag">Python</span>
-        <span class="tag">C Language</span>
-        <span class="tag">Math Modeling</span>
-        <span class="tag">SDN / P4</span>
-        <span class="tag">AI</span>
+    <nav class="navbar">
+      <div class="logo">Ethan<span>Lee</span></div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#focus">Focus</a>
+        <a href="#projects">Projects</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#contact">Contact</a>
       </div>
-    </div>
+    </nav>
 
-    <!-- 关于我 -->
-    <section>
-      <h2>关于我</h2>
-      <p>
-        我是 <span class="highlight">李恒</span>，目前就读于武汉科技大学计算机相关专业。
-        我对算法、数学建模、人工智能应用、SDN / P4 可编程网络等方向感兴趣。
-      </p>
-      <p>
-        目前我正在逐步积累编程能力、科研基础和竞赛经验，希望通过项目实践和比赛提升自己的综合能力。
-      </p>
-    </section>
+    <header class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">
+          <span class="dot"></span>
+          Undergraduate CS Learner · Builder in Progress
+        </div>
 
-    <!-- 学习方向 -->
-    <section>
-      <h2>学习方向</h2>
-      <ul>
-        <li><strong>算法与数据结构：</strong>刷题、整理题解、建立自己的算法知识体系。</li>
-        <li><strong>数学建模：</strong>学习建模流程、论文写作、数据分析和可视化表达。</li>
-        <li><strong>人工智能：</strong>关注机器学习、大模型应用、具身智能等方向。</li>
-        <li><strong>SDN / P4：</strong>学习 Mininet、OpenFlow、P4 可编程网络基础。</li>
-        <li><strong>项目实践：</strong>尝试把论文、算法和硬件想法转化为可展示的软件或系统。</li>
-      </ul>
-    </section>
+        <h1>
+          Hi, I'm <br />
+          <span class="gradient-text">Ethan Lee.</span>
+        </h1>
 
-    <!-- 项目经历 -->
-    <section>
-      <h2>项目经历</h2>
-
-      <div class="project-card">
-        <h3>智“熄”长明——智慧教室自适应节能系统</h3>
-        <p>
-          一个面向智慧教室场景的节能系统设想，结合树莓派、Arduino、人体感应模块和显示屏，
-          实现环境亮度、有人/无人状态、灯光运行时间等信息展示。
+        <p class="hero-desc">
+          A computer science undergraduate student exploring algorithms, mathematical modeling,
+          AI applications, and SDN / P4 programmable networks.
+          I am building my public learning record and project portfolio step by step.
         </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-secondary" href="https://github.com/lheng2386-png" target="_blank" rel="noopener noreferrer">
+            GitHub Profile
+          </a>
+        </div>
+
+        <div class="tag-row">
+          <span class="tag">Python</span>
+          <span class="tag">C Language</span>
+          <span class="tag">Algorithms</span>
+          <span class="tag">Math Modeling</span>
+          <span class="tag">AI</span>
+          <span class="tag">SDN / P4</span>
+        </div>
       </div>
 
-      <div class="project-card">
-        <h3>高血脂风险分层预警与干预推荐系统</h3>
-        <p>
-          基于数学建模论文思路，尝试使用机器学习方法进行健康风险预测，
-          并结合可解释性分析辅助理解模型结果。
-        </p>
+      <aside class="side">
+        <div class="side-card">
+          <h3>Current Identity</h3>
+          <p>
+            Student at Wuhan University of Science and Technology.
+            Focused on building strong fundamentals through projects, notes, and competitions.
+          </p>
+        </div>
+
+        <div class="side-card">
+          <h3>Portfolio Signals</h3>
+          <div class="metric-grid">
+            <div class="metric">
+              <strong>AI</strong>
+              <span>Applications</span>
+            </div>
+            <div class="metric">
+              <strong>P4</strong>
+              <span>Networks</span>
+            </div>
+            <div class="metric">
+              <strong>ML</strong>
+              <span>Modeling</span>
+            </div>
+            <div class="metric">
+              <strong>DSA</strong>
+              <span>Algorithms</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <h3>Personal Principle</h3>
+          <p>
+            Learn one concept. Write one note. Build one demo. Improve one project.
+          </p>
+        </div>
+      </aside>
+    </header>
+
+    <section id="about">
+      <div class="section-title">
+        <h2>About Me</h2>
+        <span>Profile</span>
       </div>
 
-      <div class="project-card">
-        <h3>SDN / P4 学习实验</h3>
-        <p>
-          正在学习 Mininet、Open vSwitch、OpenFlow 和 P4，
-          希望未来能够完成简单的可编程网络实验项目。
-        </p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Who I Am</h3>
+          <p>
+            I am Ethan Lee, a computer science undergraduate student interested in turning
+            knowledge into visible projects. My current learning path combines programming,
+            modeling, AI applications, and network systems.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>What I Value</h3>
+          <p>
+            I value long-term accumulation: solid fundamentals, clear technical writing,
+            reproducible experiments, and projects that can be demonstrated rather than only described.
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- 竞赛与训练 -->
+    <section id="focus">
+      <div class="section-title">
+        <h2>Current Focus</h2>
+        <span>Learning Directions</span>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Algorithms</h3>
+          <p>
+            Building a systematic problem-solving foundation with Python and C,
+            including arrays, linked lists, trees, graphs, greedy methods, search, and dynamic programming.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Mathematical Modeling</h3>
+          <p>
+            Learning data preprocessing, model selection, visualization, sensitivity analysis,
+            error analysis, and competition-oriented paper writing.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>AI Applications</h3>
+          <p>
+            Exploring machine learning, LLM-based applications, interpretable models,
+            and AI innovation projects that can become usable software prototypes.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>SDN / P4</h3>
+          <p>
+            Studying Mininet, Open vSwitch, OpenFlow, and P4 programmable networks.
+            The goal is to build small but complete networking experiments.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Technical Notes</h3>
+          <p>
+            Maintaining structured notes for algorithms, modeling, programming, and systems.
+            Notes help convert fragmented learning into a reusable knowledge base.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Project Portfolio</h3>
+          <p>
+            Turning competition ideas, papers, and lab directions into public-facing demos,
+            repositories, and written summaries.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-title">
+        <h2>Featured Projects</h2>
+        <span>Work in Progress</span>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <span class="project-badge">IoT / Embedded</span>
+          <h3>Smart Classroom Energy-Saving System</h3>
+          <p>
+            A smart classroom system concept based on Raspberry Pi, Arduino, PIR sensing,
+            brightness monitoring, and real-time display.
+          </p>
+          <br />
+          <ul>
+            <li>Human presence detection</li>
+            <li>Brightness monitoring</li>
+            <li>Light-on duration statistics</li>
+            <li>Energy-saving decision logic</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="project-badge">ML / Modeling</span>
+          <h3>Hyperlipidemia Risk Warning System</h3>
+          <p>
+            A health risk prediction and intervention recommendation prototype inspired by
+            mathematical modeling work.
+          </p>
+          <br />
+          <ul>
+            <li>Risk stratification</li>
+            <li>Logistic Regression</li>
+            <li>XGBoost</li>
+            <li>SHAP explainability</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="project-badge">Network Systems</span>
+          <h3>SDN / P4 Learning Lab</h3>
+          <p>
+            A long-term experiment repository for programmable networks, from Mininet topology
+            construction to P4 packet processing.
+          </p>
+          <br />
+          <ul>
+            <li>Custom topologies</li>
+            <li>Flow table experiments</li>
+            <li>Basic tunnel implementation</li>
+            <li>Flow statistics demo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="section-title">
+        <h2>Roadmap</h2>
+        <span>2026 Learning Plan</span>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">Stage 01</div>
+          <div class="timeline-content">
+            <h3>Build Programming Fundamentals</h3>
+            <p>Strengthen Python, C, Git, GitHub, basic web development, and algorithmic thinking.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Stage 02</div>
+          <div class="timeline-content">
+            <h3>Develop Competition Ability</h3>
+            <p>Accumulate modeling methods, visualization templates, paper-writing skills, and reusable code.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Stage 03</div>
+          <div class="timeline-content">
+            <h3>Produce Demonstrable Projects</h3>
+            <p>Transform modeling papers, AI ideas, and system experiments into software demos and repositories.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Stage 04</div>
+          <div class="timeline-content">
+            <h3>Move Toward Research-Oriented Work</h3>
+            <p>Learn to read papers, reproduce experiments, write reports, and connect projects with research directions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section>
-      <h2>竞赛与训练</h2>
-      <ul>
-        <li>数学建模竞赛：学习建模流程、论文结构、可视化设计与结果解释。</li>
-        <li>算法训练：持续练习 LeetCode、基础数据结构与常见算法题型。</li>
-        <li>人工智能创新类比赛：关注大模型应用、具身智能和软件系统设计。</li>
-        <li>网络技术方向：关注 SDN、P4、网络实验和未来竞赛机会。</li>
-      </ul>
+      <div class="section-title">
+        <h2>Tech Stack</h2>
+        <span>Tools & Skills</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Currently Using</h3>
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">C</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">Git</span>
+            <span class="tag">GitHub</span>
+            <span class="tag">VS Code</span>
+            <span class="tag">Obsidian</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Currently Learning</h3>
+          <div class="tag-row">
+            <span class="tag">Machine Learning</span>
+            <span class="tag">XGBoost</span>
+            <span class="tag">SHAP</span>
+            <span class="tag">Mininet</span>
+            <span class="tag">OpenFlow</span>
+            <span class="tag">P4</span>
+            <span class="tag">Linux</span>
+            <span class="tag">Data Visualization</span>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- 技术栈 -->
-    <section>
-      <h2>技术栈</h2>
-      <ul>
-        <li><strong>Python：</strong>算法练习、数据处理、机器学习基础。</li>
-        <li><strong>C 语言：</strong>程序设计基础。</li>
-        <li><strong>HTML / CSS：</strong>个人主页与网页基础。</li>
-        <li><strong>Git / GitHub：</strong>代码管理、项目展示、GitHub Pages。</li>
-        <li><strong>Obsidian：</strong>算法笔记、知识体系整理。</li>
-      </ul>
+    <section id="contact">
+      <div class="section-title">
+        <h2>Contact</h2>
+        <span>Let's Connect</span>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact">
+          <strong>GitHub</strong>
+          <a href="https://github.com/lheng2386-png" target="_blank" rel="noopener noreferrer">
+            github.com/lheng2386-png
+          </a>
+        </div>
+
+        <div class="contact">
+          <strong>Email</strong>
+          <a href="mailto:lheng2386@gmail.com">lheng2386@gmail.com</a>
+        </div>
+
+        <div class="contact">
+          <strong>Telegram</strong>
+          <a href="https://t.me/nsygsb" target="_blank" rel="noopener noreferrer">@nsygsb</a>
+        </div>
+
+        <div class="contact">
+          <strong>Homepage</strong>
+          <a href="https://lheng2386-png.github.io" target="_blank" rel="noopener noreferrer">
+            lheng2386-png.github.io
+          </a>
+        </div>
+      </div>
     </section>
 
-    <!-- 学习笔记 -->
-    <section>
-      <h2>学习笔记</h2>
-      <p>
-        我正在整理自己的算法、数学建模和计算机基础笔记。
-        后续会逐步将部分内容整理到 GitHub 或个人主页中。
-      </p>
-      <ul>
-        <li>算法题解笔记</li>
-        <li>数学建模论文模板</li>
-        <li>Python 学习记录</li>
-        <li>SDN / P4 实验记录</li>
-      </ul>
-    </section>
+    <footer class="footer">
+      <p>© 2026 Ethan Lee. Built with HTML, CSS and GitHub Pages.</p>
+    </footer>
 
-    <!-- 联系方式 -->
-    <section class="contact-card">
-      <h2>联系我</h2>
-
-      <p>
-        GitHub：
-        <a href="https://github.com/lheng2386-png" target="_blank">
-          https://github.com/lheng2386-png
-        </a>
-      </p>
-
-      <p>
-        Email：
-        <a href="mailto:lheng2386@gmail.com">
-          lheng2386@gmail.com
-        </a>
-      </p>
-
-      <p>
-        Telegram：
-        <a href="https://t.me/nsygsb" target="_blank">
-          @nsygsb
-        </a>
-      </p>
-
-      <p>
-        个人主页：
-        <a href="https://lheng2386-png.github.io" target="_blank">
-          https://lheng2386-png.github.io
-        </a>
-      </p>
-    </section>
-
-    <!-- 页脚 -->
-    <div class="footer">
-      <p>© 2026 李恒. Powered by GitHub Pages.</p>
-    </div>
-
-  </div>
+  </main>
 </body>
 </html>
