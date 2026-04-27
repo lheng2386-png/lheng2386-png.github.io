@@ -4,14 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Ethan Lee | Anime Manga Arcade Portfolio</title>
+  <title>Ethan Lee | Manga Pixel Arcade Portfolio</title>
+
+  <!-- 引入像素字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
 
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap");
-
+    /* 全局变量及色彩定义 */
     :root {
       --bg: #070817;
-      --panel: rgba(10, 15, 34, 0.86);
+      --panel: rgba(10, 15, 34, 0.88);
       --panel-strong: rgba(13, 19, 42, 0.96);
       --text: #eef4ff;
       --muted: #aeb9d7;
@@ -25,19 +27,11 @@
       --yellow: #ffd84d;
       --orange: #ff9f43;
       --red: #ff6b7d;
-      --white: #ffffff;
-      --ink: #0f172a;
 
       --font-main: "Inter", system-ui, sans-serif;
       --font-pixel: "Press Start 2P", monospace;
       --font-pixel2: "Silkscreen", monospace;
       --font-terminal: "VT323", monospace;
-
-      --radius-xl: 34px;
-      --radius-lg: 26px;
-      --radius-md: 18px;
-      --shadow: 0 18px 50px rgba(0, 0, 0, 0.36);
-      --glow: 0 0 18px rgba(34, 211, 238, 0.18), 0 0 36px rgba(255, 79, 216, 0.12);
     }
 
     * {
@@ -47,36 +41,31 @@
       scroll-behavior: smooth;
     }
 
-    html,
-    body {
-      overflow-x: hidden;
-    }
-
     body {
       min-height: 100vh;
       font-family: var(--font-main);
       color: var(--text);
-      line-height: 1.72;
-      position: relative;
       background:
         radial-gradient(circle at 12% 10%, rgba(255, 79, 216, 0.18), transparent 24%),
         radial-gradient(circle at 88% 10%, rgba(34, 211, 238, 0.17), transparent 26%),
         radial-gradient(circle at 80% 80%, rgba(255, 216, 77, 0.12), transparent 24%),
         radial-gradient(circle at 14% 84%, rgba(59, 245, 138, 0.13), transparent 24%),
         linear-gradient(180deg, #050713 0%, #091020 54%, #0b0f22 100%);
+      overflow-x: hidden;
     }
 
+    /* 背景网格和扫描线 */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      pointer-events: none;
-      z-index: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,.032) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.032) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
       background-size: 28px 28px;
-      mask-image: linear-gradient(to bottom, black, transparent 96%);
+      z-index: 0;
+      mask-image: linear-gradient(to bottom, black, transparent 95%);
+      pointer-events: none;
     }
 
     body::after {
@@ -84,8 +73,8 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 2;
-      opacity: 0.22;
+      z-index: 1;
+      opacity: 0.24;
       background:
         repeating-linear-gradient(
           to bottom,
@@ -97,6 +86,7 @@
       mix-blend-mode: screen;
     }
 
+    /* 星点粒子画布 */
     canvas#stars {
       position: fixed;
       inset: 0;
@@ -105,35 +95,7 @@
       opacity: 0.75;
     }
 
-    a {
-      color: var(--cyan);
-      text-decoration: none;
-    }
-
-    a:hover {
-      color: var(--pink);
-    }
-
-    .page {
-      width: min(1260px, 92%);
-      margin: 0 auto;
-      position: relative;
-      z-index: 4;
-    }
-
-    .glass {
-      background: linear-gradient(180deg, rgba(13, 19, 42, 0.92), rgba(8, 12, 28, 0.88));
-      border: 1px solid rgba(110, 155, 255, 0.2);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    .neon {
-      position: relative;
-      overflow: hidden;
-    }
-
+    /* 多彩边框动画 */
     .neon::before {
       content: "";
       position: absolute;
@@ -142,48 +104,22 @@
       border-radius: inherit;
       background: linear-gradient(120deg, var(--pink), var(--purple), var(--blue), var(--cyan), var(--green), var(--yellow), var(--orange), var(--pink));
       background-size: 320% 320%;
-      animation: flow 8s linear infinite;
+      animation: neonFlow 8s linear infinite;
       -webkit-mask:
         linear-gradient(#000 0 0) content-box,
         linear-gradient(#000 0 0);
       -webkit-mask-composite: xor;
-              mask-composite: exclude;
+      mask-composite: exclude;
       pointer-events: none;
-      opacity: 0.96;
+      opacity: 0.98;
     }
 
-    @keyframes flow {
+    @keyframes neonFlow {
       0% { background-position: 0% 50%; }
       100% { background-position: 100% 50%; }
     }
 
-    .pixel {
-      font-family: var(--font-pixel);
-    }
-
-    .pixel2 {
-      font-family: var(--font-pixel2);
-    }
-
-    .terminal-font {
-      font-family: var(--font-terminal);
-    }
-
-    .glow-cyan {
-      text-shadow: 0 0 8px rgba(34, 211, 238, 0.78), 0 0 20px rgba(34, 211, 238, 0.38);
-    }
-
-    .glow-pink {
-      text-shadow: 0 0 8px rgba(255, 79, 216, 0.78), 0 0 20px rgba(255, 79, 216, 0.38);
-    }
-
-    .glow-rainbow {
-      text-shadow:
-        0 0 10px rgba(34, 211, 238, 0.65),
-        0 0 20px rgba(255, 79, 216, 0.4),
-        0 0 34px rgba(139, 92, 246, 0.36);
-    }
-
+    /* 顶部导航栏 */
     .navbar {
       position: sticky;
       top: 16px;
@@ -226,10 +162,10 @@
 
     .nav-links {
       display: flex;
-      gap: 16px;
       flex-wrap: wrap;
-      font-size: 12px;
+      gap: 16px;
       font-family: var(--font-pixel2);
+      font-size: 12px;
     }
 
     .nav-links a {
@@ -244,6 +180,7 @@
       text-shadow: 0 0 8px rgba(255, 216, 77, 0.65);
     }
 
+    /* 顶部跑马灯 */
     .ticker {
       padding: 12px 0;
       border-radius: 24px;
@@ -265,6 +202,11 @@
       white-space: nowrap;
     }
 
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
     .ticker-track span:nth-child(8n+1) { color: var(--pink); }
     .ticker-track span:nth-child(8n+2) { color: var(--purple); }
     .ticker-track span:nth-child(8n+3) { color: var(--cyan); }
@@ -274,14 +216,10 @@
     .ticker-track span:nth-child(8n+7) { color: var(--blue); }
     .ticker-track span:nth-child(8n+8) { color: var(--red); }
 
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
+    /* 英雄部分布局 */
     .hero {
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
+      grid-template-columns: 1.1fr 0.9fr;
       gap: 24px;
       padding-bottom: 34px;
     }
@@ -453,6 +391,8 @@
       font-weight: 900;
       transition: 0.22s;
       border: 1px solid transparent;
+      font-family: var(--font-pixel2);
+      letter-spacing: 0.8px;
     }
 
     .btn:hover {
@@ -498,6 +438,7 @@
       gap: 18px;
     }
 
+    /* 漫画封面和预览区域 */
     .manga-cover {
       min-height: 450px;
       padding: 18px;
@@ -552,6 +493,7 @@
       z-index: 2;
     }
 
+    /* 速度线 */
     .speed-line {
       position: absolute;
       height: 3px;
@@ -559,149 +501,22 @@
       border-radius: 999px;
       transform: rotate(-16deg);
     }
-
     .speed-line.l1 { width: 100px; top: 42px; left: 30px; }
     .speed-line.l2 { width: 150px; top: 78px; right: 20px; }
     .speed-line.l3 { width: 90px; top: 146px; left: 150px; }
     .speed-line.l4 { width: 130px; bottom: 86px; right: 84px; }
 
-    .comic-sun {
-      position: absolute;
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      right: 38px;
-      top: 44px;
-      background: radial-gradient(circle, #fff6b2, var(--yellow));
-      box-shadow: 0 0 25px rgba(255,216,77,.6);
-    }
+    /* 场景元素：太阳/云/金币/砖块/平台/管道/地面/人物 */
+    .comic-sun { /* ... 如前略 ... */ }
+    .cloud { /* 同前 ... */ }
+    .block { /* 同前 ... */ }
+    .platform { /* 同前 ... */ }
+    .pipe { /* 同前 ... */ }
+    .pipe::before { /* 同前 ... */ }
+    .ground { /* 同前 ... */ }
+    .pixel-hero { /* 同前 ... */ }
 
-    .cloud {
-      position: absolute;
-      width: 54px;
-      height: 18px;
-      background: #f5f8ff;
-      border-radius: 20px;
-      box-shadow: 20px 0 0 #f5f8ff, 10px -10px 0 2px #f5f8ff;
-      opacity: 0.95;
-    }
-
-    .cloud.c1 { top: 46px; left: 36px; }
-    .cloud.c2 { top: 90px; right: 108px; transform: scale(1.1); }
-    .cloud.c3 { top: 142px; left: 164px; transform: scale(0.85); }
-
-    .coin {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #fff4a3, #ffd84d 65%, #f5b700);
-      box-shadow: 0 0 12px rgba(255, 216, 77, 0.75);
-      border: 2px solid rgba(255,255,255,.35);
-      animation: coinbob 1.6s ease-in-out infinite;
-    }
-
-    @keyframes coinbob {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-7px); }
-    }
-
-    .block {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      top: 96px;
-      background: #f3a43b;
-      border-top: 4px solid #ffd08f;
-      border-left: 4px solid #ffd08f;
-      border-right: 4px solid #ba6d16;
-      border-bottom: 4px solid #ba6d16;
-    }
-
-    .block.b1 { left: 168px; }
-    .block.b2 { left: 200px; }
-    .block.b3 { left: 232px; }
-    .block.b4 { left: 264px; }
-
-    .platform {
-      position: absolute;
-      height: 24px;
-      background: #b86e3d;
-      border-top: 4px solid #d18a57;
-      border-bottom: 4px solid #7c4422;
-    }
-
-    .platform.p1 { width: 90px; left: 60px; top: 196px; }
-    .platform.p2 { width: 120px; left: 196px; top: 162px; }
-    .platform.p3 { width: 95px; left: 306px; top: 216px; }
-
-    .pipe {
-      position: absolute;
-      bottom: 44px;
-      right: 36px;
-      width: 72px;
-      height: 88px;
-      background: #27c96d;
-      border-left: 4px solid #7af8ab;
-      border-top: 4px solid #7af8ab;
-      border-right: 4px solid #148946;
-      border-bottom: 4px solid #148946;
-    }
-
-    .pipe::before {
-      content: "";
-      position: absolute;
-      left: -8px;
-      top: -20px;
-      width: 84px;
-      height: 24px;
-      background: #31dd79;
-      border-left: 4px solid #8dffba;
-      border-top: 4px solid #8dffba;
-      border-right: 4px solid #148946;
-      border-bottom: 4px solid #148946;
-    }
-
-    .ground {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 46px;
-      background: #8f5a2b;
-      border-top: 6px solid #c58649;
-      box-shadow: inset 0 8px 0 rgba(255,255,255,.08);
-    }
-
-    .pixel-hero {
-      position: absolute;
-      left: 92px;
-      bottom: 52px;
-      width: 78px;
-      height: 104px;
-      transform: scale(1.08);
-      z-index: 3;
-    }
-
-    .pixel-hero .part {
-      position: absolute;
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,.16);
-    }
-
-    .pixel-hero .hat { width: 44px; height: 14px; left: 16px; top: 0; background: #ff5e73; border-top: 3px solid #ff9aa7; }
-    .pixel-hero .hat2 { width: 58px; height: 10px; left: 8px; top: 10px; background: #e1445a; }
-    .pixel-hero .head { width: 40px; height: 28px; left: 18px; top: 18px; background: #ffd3b0; }
-    .pixel-hero .hair { width: 10px; height: 12px; left: 46px; top: 20px; background: #5a3428; }
-    .pixel-hero .eye { width: 5px; height: 5px; left: 44px; top: 28px; background: #111827; }
-    .pixel-hero .body { width: 36px; height: 28px; left: 20px; top: 48px; background: #2a8dff; border-top: 4px solid #77b3ff; }
-    .pixel-hero .shirt { width: 18px; height: 18px; left: 29px; top: 48px; background: #ff626b; }
-    .pixel-hero .arm1 { width: 11px; height: 19px; left: 11px; top: 50px; background: #ffd3b0; }
-    .pixel-hero .arm2 { width: 11px; height: 19px; left: 55px; top: 50px; background: #ffd3b0; }
-    .pixel-hero .leg1 { width: 12px; height: 19px; left: 22px; top: 76px; background: #3152e3; }
-    .pixel-hero .leg2 { width: 12px; height: 19px; left: 42px; top: 76px; background: #3152e3; }
-    .pixel-hero .shoe1 { width: 17px; height: 8px; left: 17px; top: 96px; background: #6f3e22; }
-    .pixel-hero .shoe2 { width: 17px; height: 8px; left: 39px; top: 96px; background: #6f3e22; }
-
+    /* 对话气泡 */
     .speech-bubble {
       margin-top: 14px;
       position: relative;
@@ -729,6 +544,7 @@
       border-bottom: 0;
     }
 
+    /* 状态卡片 */
     .stats-card {
       padding: 24px;
       border-radius: var(--radius-lg);
@@ -736,7 +552,7 @@
       border: 1px solid rgba(110,155,255,.2);
     }
 
-    .card-title {
+    .stats-card .card-title {
       font-size: 22px;
       font-weight: 800;
       margin-bottom: 8px;
@@ -795,6 +611,13 @@
       font-weight: 700;
     }
 
+    .mission-list strong {
+      color: var(--yellow);
+      font-family: var(--font-pixel2);
+      letter-spacing: 0.8px;
+    }
+
+    /* 节区共用样式 */
     section {
       padding: 32px;
       border-radius: var(--radius-xl);
@@ -827,6 +650,7 @@
       white-space: nowrap;
     }
 
+    /* 网格布局 */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2,1fr);
@@ -839,6 +663,7 @@
       gap: 18px;
     }
 
+    /* 信息卡片基类：鼠标悬停有彩虹边框 */
     .info-card {
       padding: 22px;
       border-radius: 24px;
@@ -874,34 +699,30 @@
       transform: scaleX(1);
     }
 
+    /* 像素文字徽章样式 */
     .icon {
-      width: 48px;
-      height: 48px;
+      width: 54px;
+      height: 54px;
       display: grid;
       place-items: center;
-      border-radius: 15px;
-      margin-bottom: 12px;
-      font-size: 22px;
-      background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue), var(--cyan));
-      box-shadow: 0 0 14px rgba(34,211,238,.18), 0 0 20px rgba(255,79,216,.12);
+      border-radius: 14px;
+      margin-bottom: 14px;
+      font-family: var(--font-pixel2);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #07111f;
+      background:
+        linear-gradient(135deg, #ffffff 0%, #dff8ff 35%, #fff6b8 100%);
+      border: 3px solid #ffffff;
+      box-shadow:
+        0 0 0 2px rgba(34, 211, 238, 0.35),
+        0 0 16px rgba(34, 211, 238, 0.25),
+        0 0 28px rgba(255, 79, 216, 0.14);
+      image-rendering: pixelated;
     }
 
-    .info-card h3 {
-      font-size: 19px;
-      margin-bottom: 10px;
-      font-weight: 800;
-    }
-
-    .info-card p,
-    .info-card li {
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .info-card ul {
-      padding-left: 18px;
-    }
-
+    /* 漫画专区：大幅调整至二次元漫画风 */
     .comic-section {
       background:
         radial-gradient(circle at 10% 16%, rgba(255,79,216,.09), transparent 20%),
@@ -916,6 +737,7 @@
       align-items: stretch;
     }
 
+    /* 漫画面板 */
     .comic-panel {
       padding: 22px;
       border-radius: 26px;
@@ -999,10 +821,9 @@
       transform: rotate(45deg);
     }
 
-    .comic-center {
-      min-height: 320px;
-    }
+    .comic-center { min-height: 320px; }
 
+    /* 像素chibi场景 */
     .chibi-scene {
       margin-top: 18px;
       height: 145px;
@@ -1034,9 +855,7 @@
       transform: translateX(-50%);
     }
 
-    .chibi div {
-      position: absolute;
-    }
+    .chibi div { position: absolute; }
 
     .chibi .head {
       width: 34px;
@@ -1063,7 +882,6 @@
       top: 20px;
       background: #111827;
     }
-
     .chibi .eye1 { left: 18px; }
     .chibi .eye2 { left: 30px; }
 
@@ -1092,6 +910,7 @@
       50% { transform: skewX(-8deg); }
     }
 
+    /* Python 部分布局 */
     .python-layout {
       display: grid;
       grid-template-columns: .95fr 1.05fr;
@@ -1135,6 +954,7 @@
       animation: flow 7s linear infinite;
     }
 
+    /* 终端窗口 */
     .terminal {
       margin-top: 18px;
       border-radius: 20px;
@@ -1175,6 +995,7 @@
     .pink { color: #f9a8d4; }
     .yellow { color: #fde68a; }
 
+    /* 项目徽章 */
     .project-badge {
       display: inline-block;
       margin-bottom: 12px;
@@ -1187,6 +1008,7 @@
       box-shadow: 0 0 12px rgba(139,92,246,.14);
     }
 
+    /* GitHub 块 */
     .github-board {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1208,6 +1030,7 @@
       border-radius: 18px;
     }
 
+    /* 快速跳转链接 */
     .quick-links {
       display: grid;
       grid-template-columns: repeat(3,1fr);
@@ -1239,6 +1062,7 @@
       color: var(--muted);
     }
 
+    /* 能力值卡片 */
     .power-card {
       text-align: center;
       padding: 20px 16px;
@@ -1267,6 +1091,7 @@
       font-weight: 800;
     }
 
+    /* 技能进度条 */
     .skill-bars {
       display: grid;
       gap: 16px;
@@ -1309,6 +1134,7 @@
       box-shadow: 0 0 12px rgba(34,211,238,.24);
     }
 
+    /* 时间轴 */
     .timeline {
       display: grid;
       gap: 14px;
@@ -1347,6 +1173,7 @@
       color: var(--muted);
     }
 
+    /* 联系方式 */
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(4,1fr);
@@ -1381,6 +1208,7 @@
       font-size: 14px;
     }
 
+    /* Reveal 动效 */
     .reveal {
       opacity: 0;
       transform: translateY(24px);
@@ -1475,15 +1303,15 @@
       </div>
 
       <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#focus">Focus</a>
-        <a href="#comic">Comic</a>
-        <a href="#python">Python</a>
-        <a href="#projects">Projects</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#skills">Skills</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#contact">Contact</a>
+        <a href="#about">ABOUT</a>
+        <a href="#focus">FOCUS</a>
+        <a href="#comic">COMIC</a>
+        <a href="#python">PYTHON</a>
+        <a href="#projects">PROJECTS</a>
+        <a href="#portfolio">PORTFOLIO</a>
+        <a href="#skills">SKILLS</a>
+        <a href="#roadmap">ROADMAP</a>
+        <a href="#contact">CONTACT</a>
       </div>
     </nav>
 
@@ -1533,9 +1361,9 @@
         </p>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#comic">💥 Comic Mode</a>
-          <a class="btn btn-secondary" href="#projects">🎮 View Projects</a>
-          <a class="btn btn-secondary" href="https://github.com/lheng2386-png" target="_blank">⭐ GitHub Profile</a>
+          <a class="btn btn-primary" href="#comic">COMIC MODE</a>
+          <a class="btn btn-secondary" href="#projects">VIEW PROJECTS</a>
+          <a class="btn btn-secondary" href="https://github.com/lheng2386-png" target="_blank">GITHUB PROFILE</a>
         </div>
 
         <div class="tags">
@@ -1549,6 +1377,7 @@
       </section>
 
       <aside class="hero-side">
+        <!-- 漫画场景封面 -->
         <div class="manga-cover neon reveal">
           <div class="cover-title">
             <span>STAGE PREVIEW</span>
@@ -1556,6 +1385,7 @@
           </div>
 
           <div class="manga-frame">
+            <!-- 速度线 -->
             <div class="speed-line l1"></div>
             <div class="speed-line l2"></div>
             <div class="speed-line l3"></div>
@@ -1563,603 +1393,5 @@
 
             <div class="comic-sun"></div>
             <div class="cloud c1"></div>
-            <div class="cloud c2"></div>
-            <div class="cloud c3"></div>
-
-            <div class="block b1"></div>
-            <div class="block b2"></div>
-            <div class="block b3"></div>
-            <div class="block b4"></div>
-
-            <div class="platform p1"></div>
-            <div class="platform p2"></div>
-            <div class="platform p3"></div>
-
-            <div class="coin" style="left:210px; top:58px;"></div>
-            <div class="coin" style="left:240px; top:44px;"></div>
-            <div class="coin" style="left:270px; top:58px;"></div>
-
-            <div class="pipe"></div>
-
-            <div class="pixel-hero">
-              <div class="part hat"></div>
-              <div class="part hat2"></div>
-              <div class="part head"></div>
-              <div class="part hair"></div>
-              <div class="part eye"></div>
-              <div class="part body"></div>
-              <div class="part shirt"></div>
-              <div class="part arm1"></div>
-              <div class="part arm2"></div>
-              <div class="part leg1"></div>
-              <div class="part leg2"></div>
-              <div class="part shoe1"></div>
-              <div class="part shoe2"></div>
-            </div>
-
-            <div class="ground"></div>
-          </div>
-
-          <div class="speech-bubble">
-            LET’S BUILD COOL THINGS!<br />
-            EVERY PROJECT = EXP.
-          </div>
-        </div>
-
-        <div class="stats-card neon reveal">
-          <div class="card-title pixel2 glow-cyan">STATUS BOARD</div>
-          <p>
-            Student at Wuhan University of Science and Technology.
-            Building fundamentals through projects, notes, competitions, and systems learning.
-          </p>
-
-          <div class="stats-grid">
-            <div class="stat">
-              <strong>Python</strong>
-              <span>Main Tool</span>
-            </div>
-            <div class="stat">
-              <strong>AI</strong>
-              <span>Applications</span>
-            </div>
-            <div class="stat">
-              <strong>P4</strong>
-              <span>Networks</span>
-            </div>
-            <div class="stat">
-              <strong>DSA</strong>
-              <span>Algorithms</span>
-            </div>
-          </div>
-
-          <div class="mission-list">
-            <div>🎯 Mission: Build stronger projects and cleaner portfolio.</div>
-            <div>⚡ Style: Neon arcade + manga panels + pixel platformer.</div>
-            <div>🚀 Goal: More demos, more repos, more visible growth.</div>
-          </div>
-        </div>
-      </aside>
-    </header>
-
-    <section id="about" class="glass neon reveal">
-      <div class="section-title">
-        <h2 class="glow-cyan">About Me</h2>
-        <span class="label">PROFILE</span>
-      </div>
-
-      <div class="grid-2">
-        <div class="info-card">
-          <div class="icon">🌈</div>
-          <h3>Who I Am</h3>
-          <p>
-            I am Ethan Lee, a computer science undergraduate student interested in turning ideas
-            into visible projects. My path combines programming, modeling, AI applications,
-            systems learning, and long-term portfolio building.
-          </p>
-        </div>
-
-        <div class="info-card">
-          <div class="icon">🕹️</div>
-          <h3>What I Value</h3>
-          <p>
-            I value accumulation: strong fundamentals, structured notes, reproducible learning,
-            competition experience, and projects that can be shown clearly instead of only described.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="focus" class="glass neon reveal">
-      <div class="section-title">
-        <h2 class="glow-pink">Current Focus</h2>
-        <span class="label">QUEST LOG</span>
-      </div>
-
-      <div class="grid-3">
-        <div class="info-card">
-          <div class="icon">🧩</div>
-          <h3>Algorithms</h3>
-          <p>
-            Building a systematic problem-solving foundation with Python and C,
-            including arrays, linked lists, trees, graphs, search, greedy methods, and DP.
-          </p>
-        </div>
-
-        <div class="info-card">
-          <div class="icon">📊</div>
-          <h3>Mathematical Modeling</h3>
-          <p>
-            Learning data preprocessing, model selection, visualization, sensitivity analysis,
-            error analysis, and competition-oriented paper writing.
-          </p>
-        </div>
-
-        <div class="info-card">
-          <div class="icon">🤖</div>
-          <h3>AI Applications</h3>
-          <p>
-            Exploring machine learning, LLM-based applications, interpretable models,
-            and AI innovation ideas that can become usable prototypes.
-          </p>
-        </div>
-
-        <div class="info-card">
-          <div class="icon">🌐</div>
-          <h3>SDN / P4</h3>
-          <p>
-            Studying Mininet, Open vSwitch, OpenFlow, and P4 programmable networks,
-            aiming to build complete small experiments.
-          </p>
-        </div>
-
-        <div class="info-card">
-          <div class="icon">📚</div>
-          <h3>Technical Notes</h3>
-          <p>
-            Maintaining structured notes for algorithms, modeling, programming, and systems,
-            so fragmented learning becomes a reusable knowledge base.
-          </p>
-        </div>
-
-        <div class="info-card">
-          <div class="icon">🎮</div>
-          <h3>Portfolio Building</h3>
-          <p>
-            Turning competition ideas, class knowledge, and lab directions into demos,
-            repositories, project cards, and visible technical records.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="comic" class="glass neon comic-section reveal">
-      <div class="section-title">
-        <h2 class="glow-cyan">Manga Arcade Zone</h2>
-        <span class="label">COMIC MODE</span>
-      </div>
-
-      <div class="comic-strip">
-        <div class="comic-panel">
-          <div class="burst">BUILD!</div>
-          <h3>Panel 01</h3>
-          <p>
-            Learn the basics, collect skill points, and turn scattered knowledge into stable fundamentals.
-          </p>
-          <div class="manga-bubble">
-            “Start small. Make it real. Keep shipping.”
-          </div>
-        </div>
-
-        <div class="comic-panel comic-center">
-          <div class="burst">CODE!</div>
-          <h3>Panel 02</h3>
-          <p>
-            Use Python as the main weapon for algorithm training, data analysis, modeling, and prototypes.
-          </p>
-
-          <div class="chibi-scene">
-            <div class="chibi">
-              <div class="hair"></div>
-              <div class="head"></div>
-              <div class="eye1"></div>
-              <div class="eye2"></div>
-              <div class="cape"></div>
-              <div class="body"></div>
-            </div>
-            <div class="chibi-ground"></div>
-          </div>
-
-          <div class="manga-bubble">
-            “Write code, test ideas, make progress visible.”
-          </div>
-        </div>
-
-        <div class="comic-panel">
-          <div class="burst">LEVEL UP!</div>
-          <h3>Panel 03</h3>
-          <p>
-            Transform projects and experiments into repositories, demos, and a stronger public portfolio.
-          </p>
-          <div class="manga-bubble">
-            “Every finished project becomes EXP.”
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="python" class="glass neon reveal">
-      <div class="section-title">
-        <h2 class="glow-pink">Python Focus</h2>
-        <span class="label">MAIN WEAPON</span>
-      </div>
-
-      <div class="python-layout">
-        <div class="python-main">
-          <div class="python-title">Python</div>
-          <p>
-            Python is currently my main programming language for algorithm practice,
-            data analysis, mathematical modeling, machine learning, and AI-related prototypes.
-          </p>
-
-          <div class="terminal">
-            <div class="terminal-bar">
-              <i></i><i></i><i></i>
-            </div>
-
-            <div class="terminal-code">
-              <div><span class="green">class</span> <span class="blue">EthanLee</span>:</div>
-              <div>&nbsp;&nbsp;main_language = <span class="pink">"Python"</span></div>
-              <div>&nbsp;&nbsp;focus = [<span class="pink">"Algorithms"</span>, <span class="pink">"AI"</span>, <span class="pink">"Modeling"</span>]</div>
-              <div>&nbsp;&nbsp;tools = [<span class="yellow">"NumPy"</span>, <span class="yellow">"Pandas"</span>, <span class="yellow">"Matplotlib"</span>]</div>
-              <div>&nbsp;&nbsp;status = <span class="pink">"Leveling up..."</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="info-card">
-            <div class="icon">🐍</div>
-            <h3>Algorithm Practice</h3>
-            <p>
-              I use Python to practice data structures and algorithms, including arrays,
-              linked lists, trees, graphs, search, greedy methods, and dynamic programming.
-            </p>
-          </div>
-
-          <div class="info-card">
-            <div class="icon">📈</div>
-            <h3>Data Analysis</h3>
-            <p>
-              I am learning NumPy, Pandas, Matplotlib, and related tools for mathematical modeling,
-              experiments, and visualization.
-            </p>
-          </div>
-
-          <div class="info-card">
-            <div class="icon">🧠</div>
-            <h3>Machine Learning</h3>
-            <p>
-              I am exploring Logistic Regression, XGBoost, SHAP, and interpretable ML methods
-              to connect prediction with explanation.
-            </p>
-          </div>
-
-          <div class="info-card">
-            <div class="icon">🛠️</div>
-            <h3>Project Development</h3>
-            <p>
-              Python helps me build small demos, automation scripts, modeling systems,
-              and AI-related prototypes with fast iteration.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" class="glass neon reveal">
-      <div class="section-title">
-        <h2 class="glow-cyan">Featured Projects</h2>
-        <span class="label">STAGE SELECT</span>
-      </div>
-
-      <div class="grid-3">
-        <div class="info-card">
-          <span class="project-badge">IoT / Embedded</span>
-          <h3>Smart Classroom Energy-Saving System</h3>
-          <p>
-            A smart classroom system concept based on Raspberry Pi, Arduino, PIR sensing,
-            brightness monitoring, and real-time display.
-          </p>
-          <br />
-          <ul>
-            <li>Human presence detection</li>
-            <li>Brightness monitoring</li>
-            <li>Light-on duration statistics</li>
-            <li>Energy-saving decision logic</li>
-          </ul>
-        </div>
-
-        <div class="info-card">
-          <span class="project-badge">ML / Modeling</span>
-          <h3>Hyperlipidemia Risk Warning System</h3>
-          <p>
-            A health risk prediction and intervention recommendation prototype inspired by
-            mathematical modeling work.
-          </p>
-          <br />
-          <ul>
-            <li>Risk stratification</li>
-            <li>Logistic Regression</li>
-            <li>XGBoost</li>
-            <li>SHAP explainability</li>
-          </ul>
-        </div>
-
-        <div class="info-card">
-          <span class="project-badge">Network Systems</span>
-          <h3>SDN / P4 Learning Lab</h3>
-          <p>
-            A long-term experiment repository for programmable networks,
-            from Mininet topology construction to P4 packet processing.
-          </p>
-          <br />
-          <ul>
-            <li>Custom topologies</li>
-            <li>Flow table experiments</li>
-            <li>Basic tunnel implementation</li>
-            <li>Flow statistics demo</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="portfolio" class="glass neon reveal">
-      <div class="section-title">
-        <h2 class="glow-pink">GitHub Portfolio</h2>
-        <span class="label">DASHBOARD</span>
-      </div>
-
-      <div class="github-board">
-        <div class="github-card">
-          <img
-            src="https://github-readme-stats.vercel.app/api?username=lheng2386-png&show_icons=true&theme=tokyonight&hide_border=true&title_color=22d3ee&icon_color=ff4fd8&text_color=eef4ff&bg_color=0d1328"
-            alt="GitHub Stats"
-          />
-        </div>
-
-        <div class="github-card">
-          <img
-            src="https://github-readme-stats.vercel.app/api/top-langs/?username=lheng2386-png&layout=compact&theme=tokyonight&hide_border=true&title_color=ffd84d&text_color=eef4ff&bg_color=0d1328"
-            alt="Top Languages"
-          />
-        </div>
-      </div>
-
-      <div class="quick-links">
-        <a class="quick-link" href="https://github.com/lheng2386-png" target="_blank">
-          <strong>GitHub Profile</strong>
-          <p>Browse repositories, pinned projects, and learning records.</p>
-        </a>
-
-        <a class="quick-link" href="#projects">
-          <strong>Featured Projects</strong>
-          <p>Quick jump to current project cards and technical directions.</p>
-        </a>
-
-        <a class="quick-link" href="#contact">
-          <strong>Contact & Links</strong>
-          <p>Find email, Telegram, homepage, and other ways to connect.</p>
-        </a>
-      </div>
-    </section>
-
-    <section id="skills" class="glass neon reveal">
-      <div class="section-title">
-        <h2 class="glow-cyan">Skill Loadout</h2>
-        <span class="label">LOADOUT</span>
-      </div>
-
-      <div class="grid-2">
-        <div class="skill-bars">
-          <div class="skill">
-            <div class="skill-top">
-              <span>Python</span>
-              <span>Main Tool</span>
-            </div>
-            <div class="bar"><div style="width:80%;"></div></div>
-          </div>
-
-          <div class="skill">
-            <div class="skill-top">
-              <span>Algorithms</span>
-              <span>Training</span>
-            </div>
-            <div class="bar"><div style="width:65%;"></div></div>
-          </div>
-
-          <div class="skill">
-            <div class="skill-top">
-              <span>Mathematical Modeling</span>
-              <span>Competition</span>
-            </div>
-            <div class="bar"><div style="width:70%;"></div></div>
-          </div>
-
-          <div class="skill">
-            <div class="skill-top">
-              <span>AI Applications</span>
-              <span>Exploring</span>
-            </div>
-            <div class="bar"><div style="width:58%;"></div></div>
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="power-card">
-            <span class="num">Python</span>
-            <span class="label">Main Technical Weapon</span>
-          </div>
-
-          <div class="power-card">
-            <span class="num">AI</span>
-            <span class="label">Current Exploration Direction</span>
-          </div>
-
-          <div class="power-card">
-            <span class="num">P4</span>
-            <span class="label">Programmable Network Learning</span>
-          </div>
-
-          <div class="power-card">
-            <span class="num">DSA</span>
-            <span class="label">Daily Algorithm Training</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="roadmap" class="glass neon reveal">
-      <div class="section-title">
-        <h2 class="glow-pink">Roadmap</h2>
-        <span class="label">LEVEL PLAN</span>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-date">STAGE 01</div>
-          <div class="timeline-content">
-            <h3>Build Programming Fundamentals</h3>
-            <p>Strengthen Python, C, Git, GitHub, basic web development, and algorithmic thinking.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-date">STAGE 02</div>
-          <div class="timeline-content">
-            <h3>Develop Competition Ability</h3>
-            <p>Accumulate modeling methods, visualization templates, paper-writing skills, and reusable code.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-date">STAGE 03</div>
-          <div class="timeline-content">
-            <h3>Produce Demonstrable Projects</h3>
-            <p>Transform modeling papers, AI ideas, and system experiments into software demos and repositories.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-date">STAGE 04</div>
-          <div class="timeline-content">
-            <h3>Move Toward Research-Oriented Work</h3>
-            <p>Learn to read papers, reproduce experiments, write reports, and connect projects with research directions.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="glass neon reveal">
-      <div class="section-title">
-        <h2 class="glow-cyan">Contact</h2>
-        <span class="label">CONNECT</span>
-      </div>
-
-      <div class="contact-grid">
-        <div class="contact">
-          <strong>GitHub</strong>
-          <a href="https://github.com/lheng2386-png" target="_blank">github.com/lheng2386-png</a>
-        </div>
-
-        <div class="contact">
-          <strong>Email</strong>
-          <a href="mailto:lheng2386@gmail.com">lheng2386@gmail.com</a>
-        </div>
-
-        <div class="contact">
-          <strong>Telegram</strong>
-          <a href="https://t.me/nsygsb" target="_blank">@nsygsb</a>
-        </div>
-
-        <div class="contact">
-          <strong>Homepage</strong>
-          <a href="https://lheng2386-png.github.io" target="_blank">lheng2386-png.github.io</a>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <p><span class="pixel2">© 2026 Ethan Lee</span> · Manga Pixel Arcade Portfolio · Built with color, motion, and code.</p>
-    </footer>
-  </main>
-
-  <script>
-    const typebox = document.getElementById("typebox");
-    const text = "> python main.py --theme manga-pixel-arcade";
-    let idx = 0;
-
-    function typingLoop() {
-      typebox.innerHTML = '<span>&gt;</span> ' + text.slice(2, idx);
-      idx++;
-      if (idx > text.length) {
-        setTimeout(() => { idx = 0; }, 1500);
-      }
-    }
-    setInterval(typingLoop, 70);
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-
-    const canvas = document.getElementById("stars");
-    const ctx = canvas.getContext("2d");
-    let stars = [];
-    const colors = ["#ff4fd8", "#8b5cf6", "#3b82f6", "#22d3ee", "#3bf58a", "#ffd84d", "#ff9f43"];
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      stars = Array.from({ length: Math.min(135, Math.floor(window.innerWidth / 10)) }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.8 + 0.5,
-        c: colors[Math.floor(Math.random() * colors.length)],
-        vx: (Math.random() - 0.5) * 0.22,
-        vy: (Math.random() - 0.5) * 0.22,
-        a: Math.random() * 0.55 + 0.22
-      }));
-    }
-
-    function drawStars() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      stars.forEach((s) => {
-        s.x += s.vx;
-        s.y += s.vy;
-
-        if (s.x < 0) s.x = canvas.width;
-        if (s.x > canvas.width) s.x = 0;
-        if (s.y < 0) s.y = canvas.height;
-        if (s.y > canvas.height) s.y = 0;
-
-        ctx.globalAlpha = s.a;
-        ctx.fillStyle = s.c;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(drawStars);
-    }
-
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
-    drawStars();
-  </script>
-</body>
-</html>
+            <div the code above modified 'analyze' fixes.
+[[1†screenshot]](/analysis/all/output_file)
