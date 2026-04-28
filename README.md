@@ -1,31 +1,53 @@
 # Ethan Lee | Code Island Study Desk
 
-这是 Ethan Lee 的 GitHub Pages 个人主页仓库。页面以 **Code Island** 为主题，把个人介绍、学习方向、项目工作台、Python 学习记录、算法训练、建模实践和 GitHub 展示整合成一个可在线访问的个人主页。
+This is the GitHub Pages repository for Ethan Lee’s personal homepage.  
+The website uses a **Code Island** theme to present personal information, learning directions, project workbench, Python learning records, algorithm training, mathematical modeling practice, and GitHub-related showcases in one online personal page.
 
-在线访问地址：
+Online site:
 
-[https://lheng2386-png.github.io](https://lheng2386-png.github.io)
+https://lheng2386-png.github.io
 
-## 项目定位
+## Project Positioning
 
-页面主要用于展示当前学习状态、技术兴趣和阶段性项目方向，同时保留清晰的代码结构，方便后续继续维护和扩展。
+This website is designed to showcase my current learning status, technical interests, and ongoing project directions.
 
-主页风格采用像素游戏、漫画分镜和霓虹界面结合的视觉方向。内容上更偏向真实学习桌，而不是夸张的作品集模板：项目卡片会明确标注 building、draft、learning、online 等状态，用来展示正在积累和推进的内容。
+Instead of being an exaggerated portfolio template, the page is closer to a real personal study desk. It keeps a clear structure for future maintenance and expansion, while using project status labels such as `building`, `draft`, `learning`, and `online` to reflect my actual learning and development progress.
 
-## 页面内容
+The visual style combines pixel-game elements, manga-style panels, and neon interface effects to create a personal and recognizable homepage atmosphere.
 
-- **Hero / Code Island Log**：主页首屏，展示个人定位、学习关键词和 GitHub 入口。
-- **About Me**：个人简介与学习态度说明。
-- **Quest Log**：当前重点方向，包括算法、数学建模、可解释机器学习、SDN / P4、技术写作和小型 Demo。
-- **Code Island Zone**：用漫画分镜形式表达 Read -> Code -> Save 的学习流程。
-- **Python Lab**：说明 Python 在算法练习、数据分析、建模实验和项目开发中的用途。
-- **Workbench**：项目工作台，展示算法笔记、建模工具箱、健康风险建模草稿、智能教室节能想法、SDN / P4 学习日志和本主页项目。
-- **GitHub Shelf**：展示 GitHub 数据卡片、仓库方向和快速链接。
-- **Current Tools**：当前使用和学习中的工具与能力方向。
-- **Next Steps**：后续学习路线和阶段目标。
-- **Contact**：公开联系入口与当前状态说明。
+## Page Sections
 
-## 技术栈
+- **Hero / Code Island Log**  
+  The landing section of the homepage, showing my personal positioning, learning keywords, and GitHub entry.
+
+- **About Me**  
+  A short introduction about myself, my learning attitude, and current academic focus.
+
+- **Quest Log**  
+  Current learning and exploration directions, including algorithms, mathematical modeling, interpretable machine learning, SDN / P4, technical writing, and small demo projects.
+
+- **Code Island Zone**  
+  A manga-panel-style section that expresses my learning workflow: `Read -> Code -> Save`.
+
+- **Python Lab**  
+  A section describing how Python is used in algorithm practice, data analysis, modeling experiments, and project development.
+
+- **Workbench**  
+  A project workbench that includes algorithm notes, modeling toolkits, health-risk modeling drafts, smart classroom energy-saving ideas, SDN / P4 learning logs, and this personal homepage project.
+
+- **GitHub Shelf**  
+  A section for GitHub profile cards, repository directions, and quick links.
+
+- **Current Tools**  
+  Tools, frameworks, and technical abilities that I am currently using or learning.
+
+- **Next Steps**  
+  My upcoming learning roadmap and short-term goals.
+
+- **Contact**  
+  Public contact entry and current status information.
+
+## Tech Stack
 
 - HTML5
 - CSS3
@@ -34,57 +56,57 @@
 - Google Fonts
 - GitHub Readme Stats
 
-页面为纯静态项目，不依赖构建工具。`index.html` 负责页面结构，`css/style.css` 负责视觉样式和响应式布局，`js/main.js` 负责打字动画、滚动显示和背景粒子效果。
+This is a pure static website without any build tools.
 
-## 文件结构
+- `index.html` defines the page structure.
+- `css/style.css` handles visual design and responsive layout.
+- `js/main.js` controls typing animation, scroll reveal effects, and background particle effects.
 
-```text
-.
-├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   └── main.js
-└── README.md
-```
+## File Structure
 
-## 本地预览
+    .
+    ├── index.html
+    ├── css/
+    │   └── style.css
+    ├── js/
+    │   └── main.js
+    └── README.md
 
-直接在浏览器中打开 `index.html` 即可预览页面。
+## Local Preview
 
-如果希望用本地服务器预览，也可以在仓库根目录运行：
+You can preview the website by opening `index.html` directly in a browser.
 
-```bash
-python3 -m http.server 8000
-```
+If you prefer to run a local server, execute the following command in the repository root:
 
-然后访问：
+    python3 -m http.server 8000
 
-```text
-http://localhost:8000
-```
+Then visit:
 
-## 当前状态
+    http://localhost:8000
 
-当前版本已经完成以下内容：
+## Current Status
 
-- 完整个人主页页面结构
-- 响应式布局
-- 像素游戏首屏场景
-- 左右漫画分镜背景
-- 项目工作台卡片
-- Python 学习展示区
-- GitHub 数据展示区
-- 联系信息区域
-- 打字动画和背景粒子效果
+The current version has completed the following parts:
 
-## 后续维护计划
+- Complete personal homepage structure
+- Responsive layout
+- Pixel-game-style hero scene
+- Manga-style side panels
+- Project workbench cards
+- Python learning showcase section
+- GitHub statistics display section
+- Contact information section
+- Typing animation and background particle effects
 
-- 将 Workbench 中的项目卡片逐步替换为真实仓库链接。
-- 持续补充算法笔记、建模项目和 SDN / P4 学习记录。
-- 优化移动端细节和加载性能。
-- 根据实际项目进度更新页面文案，保持主页内容和个人学习状态一致。
+## Future Maintenance Plan
 
-## 仓库说明
+- Gradually replace the project cards in the Workbench section with real repository links.
+- Continue adding algorithm notes, mathematical modeling projects, and SDN / P4 learning records.
+- Optimize mobile details and loading performance.
+- Update homepage text based on real project progress so that the website remains consistent with my current learning status.
 
-本仓库是个人主页的源代码仓库，部署目标为 GitHub Pages。主页内容会随着学习记录和项目积累继续更新。
+## Repository Description
+
+This repository contains the source code of my personal homepage and is deployed through GitHub Pages.
+
+The homepage will continue to be updated as my learning records, project experience, and technical explorations grow.
